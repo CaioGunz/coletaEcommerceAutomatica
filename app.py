@@ -1,7 +1,7 @@
 import os
 import tkinter as tk
 import customtkinter
-from classes.pesquisaAnunciosML import pesquisaMercadoLivre
+from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
 
 
 class janelas:
