@@ -1,13 +1,15 @@
 import pandas as pd
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 from time import sleep
 
 
+lista_valores = []
 
 class iniciaDriver:
     
@@ -41,41 +43,45 @@ class iniciaDriver:
 class pesquisaMercadoLivre(iniciaDriver):
     
     def __init__(self, link, categoria):
-        super().__init__(self, link)
+        super().__init__(driver=None, link=link)
         self.categoria = categoria
-    
-    def coletaAnuncios(self):
         
-        lista_valores = []
+    def novoModeloColeta(self):
         
         self.driver = self.chamaDriver()
         self.driver.get(self.link)
         
         while True:
-            for i in self.driver.find_elements(By.XPATH, '//li[@class="ui-search-layout__item"]'):
-                sleep(1)
-                links = i.find_elements(By.XPATH, './/a[@class="ui-search-item__group__element ui-search-link"]')
-                
-                for link in links:
-                    linkColetado = link.get_attribute('href')
-                    categoria = self.categoria
-                
-                    lista_valores.append([linkColetado, categoria])
+            page_content = self.driver.page_source
             
-            try:
-                linkNextPage = self.driver.find_element(By.XPATH, '//a[contains (@title, "Seguinte")]')
-                linkNextPage.click()
+            site = BeautifulSoup(page_content, 'html.parser')
+            
+            produtos = site.find_all('li', attrs={'class': 'ui-search-layout__item'})
+            
+            for produto in produtos:
+                link = produto.find('a', attrs={'class': 'ui-search-item__group__element ui-search-link__title-card ui-search-link'})
+                categoria = self.categoria
+
+                lista_valores.append([link['href'], categoria])
+                 
+            proximaPagina = site.find('a', attrs={'title': 'Seguinte'})
+            if proximaPagina:
+                proximaPaginaLink = proximaPagina['href']
+                self.driver.get(proximaPaginaLink)
                 sleep(1)
-                '''   
-                sleep(0.5)
-                if next_page:
-                    self.driver.get(next_page)
-                else:
-                    self.driver.close()
-                '''
-            except NoSuchElementException:
+            else:
+                print('Proxima Pagina Nao Encontrada!!! ENCERRANDO')
                 self.driver.close()
-                    
+                break
+        self.salvarDados()
+            
+
+            
+
+    def salvarDados(self):
+        if self.driver is not None:
             column = ['link', 'categoria']
             planilhaGerada = pd.DataFrame(lista_valores, columns=column)
             planilhaGerada.to_csv('planilha.csv', index=False, sep=';')
+            
+            

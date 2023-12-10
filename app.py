@@ -55,7 +55,7 @@ class janelas:
         categoria = self.inpuColetaCategoria.get()
         
         pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)
-        pesquisaAnuncio.coletaAnuncios()
+        pesquisaAnuncio.novoModeloColeta()
     
     def voltarPaginaInicial(self):
         self.rootPesquisaML.destroy()
