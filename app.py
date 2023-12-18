@@ -47,25 +47,18 @@ class janelas:
         self.botaoIniciaPesquisa = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa', command=self.coletaDadosParaPesquisa)
         self.botaoIniciaPesquisa.grid(row=3, column=2, pady=10)
         
-        self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Pesquisa Anunciante', command=self.coletaDadosAnuncianteML)
-        self.botaoiniciaPesquisaAnunciante.grid(row=4, column=2, pady=10)
+        '''fazer a lógica para este botão e apos tudo funcionando. Não vai ser gerado nova janela, pois os dados são inconsistentes e devem ser 
+        tratados para que possa ser feito a analise, ou seja, a analise deve ser feito fora da em outra plataforma (Excel, Power BI, etc)
         
+        #Botao inicia pesquisa anunciante
+        self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Pesquisa Anunciante', command=)
+        self.botaoiniciaPesquisaAnunciante.grid(row=4, column=2, pady=10)
+        '''
         
         #Botao voltar pagina inicial
         self.botaoVoltaPaginaInicial = customtkinter.CTkButton(self.rootPesquisaML, text='Volta Pagina Inicial', command=self.voltarPaginaInicial)
         self.botaoVoltaPaginaInicial.grid(row=5, column=1, pady=10)
    
-    '''     
-    def pesquisaAnuncianteMercadoLivre(self):
-        
-        #fecha a pagina de pesquisa de anuncios
-        self.rootPesquisaML.destroy()
-        
-        self.rootPesquisaAnunciante = tk.Toplevel()
-    
-    '''   
-    def coletaDadosAnuncianteML(self):
-        self.coletaAnunciantes()
     
     def coletaDadosParaPesquisa(self):
         linkColetado = self.inputEntradaLink.get()
