@@ -1,7 +1,7 @@
 from selenium import webdriver
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from time import sleep
 
@@ -24,10 +24,11 @@ class iniciaDriver:
                         "Mozilla/5.0 (windows nt 6.0; win64; x64; rv:7.2) gecko/20100101 firefox/7.2.1",
                         "Mozilla/5.0 (windows; u; windows nt 5.2) applewebkit/531.2.2 (khtml, like gecko) chrome/25.0.899.0 safari/531.2.2")
         
-        option = webdriver.FirefoxOptions()
+        option = webdriver.ChromeOptions()
         option.add_argument(f'user-agent={user_agent}')
-        servico = Service(GeckoDriverManager().install())
-        driver = webdriver.Firefox(service=servico, options=option)
+        option.add_argument('--headless')
+        servico = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=servico, options=option)
         
         if self.link:
             driver.get(self.link)

@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 import customtkinter
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
+from classes.chamaDriver.chamaDriver import iniciaDriver
 
 
 class janelas:
@@ -49,13 +50,14 @@ class janelas:
         #Botao voltar pagina inicial
         self.botaoVoltaPaginaInicial = customtkinter.CTkButton(self.rootPesquisaML, text='Volta Pagina Inicial', command=self.voltarPaginaInicial)
         self.botaoVoltaPaginaInicial.grid(row=5, column=1, pady=10)
+        
     
     def coletaDadosParaPesquisa(self):
         linkColetado = self.inputEntradaLink.get()
         categoria = self.inpuColetaCategoria.get()
         
-        pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)
-        pesquisaAnuncio.novoModeloColeta()
+        pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
+        pesquisaAnuncio.coletaAnuncios()
     
     def voltarPaginaInicial(self):
         self.rootPesquisaML.destroy()
