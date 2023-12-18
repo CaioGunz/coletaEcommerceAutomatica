@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 import customtkinter
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
+from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteML
 from classes.chamaDriver.chamaDriver import iniciaDriver
 
 
@@ -46,11 +47,25 @@ class janelas:
         self.botaoIniciaPesquisa = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa', command=self.coletaDadosParaPesquisa)
         self.botaoIniciaPesquisa.grid(row=3, column=2, pady=10)
         
+        self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Pesquisa Anunciante', command=self.coletaDadosAnuncianteML)
+        self.botaoiniciaPesquisaAnunciante.grid(row=4, column=2, pady=10)
+        
         
         #Botao voltar pagina inicial
         self.botaoVoltaPaginaInicial = customtkinter.CTkButton(self.rootPesquisaML, text='Volta Pagina Inicial', command=self.voltarPaginaInicial)
         self.botaoVoltaPaginaInicial.grid(row=5, column=1, pady=10)
+   
+    '''     
+    def pesquisaAnuncianteMercadoLivre(self):
         
+        #fecha a pagina de pesquisa de anuncios
+        self.rootPesquisaML.destroy()
+        
+        self.rootPesquisaAnunciante = tk.Toplevel()
+    
+    '''   
+    def coletaDadosAnuncianteML(self):
+        self.coletaAnunciantes()
     
     def coletaDadosParaPesquisa(self):
         linkColetado = self.inputEntradaLink.get()
