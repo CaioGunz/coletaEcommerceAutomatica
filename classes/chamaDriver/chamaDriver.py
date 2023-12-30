@@ -26,7 +26,7 @@ class iniciaDriver:
         
         option = webdriver.ChromeOptions()
         option.add_argument(f'user-agent={user_agent}')
-        option.add_argument('--headless')
+        #option.add_argument('--headless')
         servico = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=servico, options=option)
         

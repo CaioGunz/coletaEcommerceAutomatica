@@ -2,7 +2,7 @@ import os
 import tkinter as tk
 import customtkinter
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
-from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteML
+from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteMl
 from classes.chamaDriver.chamaDriver import iniciaDriver
 
 
@@ -49,16 +49,22 @@ class janelas:
         
         '''fazer a lógica para este botão e apos tudo funcionando. Não vai ser gerado nova janela, pois os dados são inconsistentes e devem ser 
         tratados para que possa ser feito a analise, ou seja, a analise deve ser feito fora da em outra plataforma (Excel, Power BI, etc)
-        
-        #Botao inicia pesquisa anunciante
-        self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Pesquisa Anunciante', command=)
-        self.botaoiniciaPesquisaAnunciante.grid(row=4, column=2, pady=10)
         '''
+        #Botao inicia pesquisa anunciante
+        self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Pesquisa Anunciante', command=self.coletaDadosAnuncianteML)
+        self.botaoiniciaPesquisaAnunciante.grid(row=4, column=2, pady=10)
+        
         
         #Botao voltar pagina inicial
         self.botaoVoltaPaginaInicial = customtkinter.CTkButton(self.rootPesquisaML, text='Volta Pagina Inicial', command=self.voltarPaginaInicial)
         self.botaoVoltaPaginaInicial.grid(row=5, column=1, pady=10)
    
+   
+    def coletaDadosAnuncianteML(self):
+        linkColetado = self.inputEntradaLink.get()
+        
+        pesquisaAnunciante = pesquisaAnuncianteMl(link='', categoria='')
+        pesquisaAnunciante.pegaLink()
     
     def coletaDadosParaPesquisa(self):
         linkColetado = self.inputEntradaLink.get()
