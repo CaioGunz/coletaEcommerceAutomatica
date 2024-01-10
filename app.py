@@ -21,26 +21,26 @@ class janelas:
         self.root.withdraw()
         
         #Cria a pagina de pesquisa
-        self.rootPesquisaML = tk.Toplevel()
+        self.rootPesquisaML = customtkinter.CTkToplevel()
         self.rootPesquisaML.title('Pesquisa Mercado Livre')
         self.rootPesquisaML.resizable(width=False, height=False)
         self.rootPesquisaML.geometry('500x300')
         self.iconeJanelas(self.rootPesquisaML)
         
         #Label para entrada de link
-        self.labelEntradaDeLink = tk.Label(self.rootPesquisaML, text='Insira o Link aqui', font=('Arial', 12, 'bold'))
+        self.labelEntradaDeLink = customtkinter.CTkLabel(self.rootPesquisaML, text='Insira o Link aqui', font=('Arial', 12, 'bold'))
         self.labelEntradaDeLink.grid(row=1, column=1, pady=10)
         
         #Entry Entrada de link
-        self.inputEntradaLink = tk.Entry(self.rootPesquisaML)
+        self.inputEntradaLink = customtkinter.CTkEntry(self.rootPesquisaML)
         self.inputEntradaLink.grid(row=1, column=2, pady=10, ipadx=70)
         
         #Label para coleta da categoria
-        self.labelColetaCategoria = tk.Label(self.rootPesquisaML, text='Insira a categoria pesquisada', font=('Arial', 12, 'bold'))
+        self.labelColetaCategoria = customtkinter.CTkLabel(self.rootPesquisaML, text='Insira a categoria pesquisada', font=('Arial', 12, 'bold'))
         self.labelColetaCategoria.grid(row=2, column=1, pady=10)
         
         #Input Coleta Categoria
-        self.inpuColetaCategoria = tk.Entry(self.rootPesquisaML)
+        self.inpuColetaCategoria = customtkinter.CTkEntry(self.rootPesquisaML)
         self.inpuColetaCategoria.grid(row=2, column=2, pady=10, ipadx=40)
         
         #Botao inicia a pesquisa
@@ -89,7 +89,7 @@ class janelas:
     
 
 def main():
-    root = tk.Tk()
+    root = customtkinter.CTk()
     app = janelas(root)
     root.resizable(width=False, height=False)
     root.geometry('500x300')
