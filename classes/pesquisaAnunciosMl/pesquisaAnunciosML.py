@@ -14,7 +14,7 @@ class pesquisaMercadoLivre(iniciaDriver):
         super().__init__(driver=None, link=link)
         self.categoria = categoria
         
-    def coletaAnuncios(self):
+    def coletaAnunciosML(self):
         
         #Pega o driver da classe chamaDriver e adiciona o link que foi inserido no input de link da classe app
         self.driver = self.chamaDriver()
