@@ -32,6 +32,7 @@ class pesquisaMercadoLivre(iniciaDriver):
             
             #Abre um loop para cada 'li' coletado na variavel produtos
             for produto in produtos:
+                sleep(2)
                 #Variavel que coleta o link da tag 'a' da classe definida
                 link = produto.find('a', attrs={'class': 'ui-search-item__group__element ui-search-link__title-card ui-search-link'})
                 #Pega a categoria que foi inserida no input da classe app
@@ -67,6 +68,6 @@ class pesquisaMercadoLivre(iniciaDriver):
             planilhaGerada = pd.DataFrame(lista_valores, columns=column)
             #Salva o arquivo com o nome de planilha.csv separada por ; Obs: Se o nome for alterado por quebrar o codigo
             # entao se for alterado deve ser alterado tambem na classe pesquisaAnuncianteML
-            planilhaGerada.to_csv('planilha.csv', index=False, sep=';')
+            planilhaGerada.to_csv('pesquisaAnunciosMercadoLivre.csv', index=False, sep=';')
             
             

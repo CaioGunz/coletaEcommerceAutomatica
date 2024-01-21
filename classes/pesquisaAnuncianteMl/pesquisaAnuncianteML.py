@@ -12,7 +12,7 @@ class pesquisaAnuncianteMl(iniciaDriver):
     
     #leitura da tabela gerada na classe pesquisaAnunciosML (a planilha deve estar na pasta do projeto 
     # para que funcione corretamente)
-    filePath = 'planilha.csv'
+    filePath = 'pesquisaAnunciosMercadoLivre.csv'
     links = pd.read_csv(filePath, sep=';')
     
     
@@ -121,4 +121,4 @@ class pesquisaAnuncianteMl(iniciaDriver):
         columns = ['titulo', 'preco', 'qtdVendida', 'linkVendedor', 'classificacaoVendedor', 'marca', 'sku', 'categoria', 'link']
         planilha = pd.DataFrame(lista_valores, columns=columns)
         #Salva a pesquisa realizada com o nome de planilhaGerada no formato CSV separada por ;
-        planilha.to_csv('planilhaGerada.csv', index=False, sep=';', encoding='utf-8')
+        planilha.to_csv('pesquisaAnuncianteMercadoLivre.csv', index=False, sep=';', encoding='utf-8')

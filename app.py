@@ -8,6 +8,7 @@ from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnunciante
 from classes.chamaDriver.chamaDriver import iniciaDriver
 
 
+
 class janelas:
     
     #Funcao __init__ que cria a primeira e principal janela do sistema com botoes
