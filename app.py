@@ -49,18 +49,18 @@ class janelas:
         
         #Label para coleta da categoria
         self.labelColetaCategoria = customtkinter.CTkLabel(self.rootPesquisaML, text='Insira a categoria pesquisada', font=('Arial', 12, 'bold'))
-        self.labelColetaCategoria.grid(row=2, column=1, pady=10)
+        self.labelColetaCategoria.grid(row=2, column=1, pady=10, padx=5)
         
         #Input Coleta Categoria
         self.inpuColetaCategoria = customtkinter.CTkEntry(self.rootPesquisaML)
         self.inpuColetaCategoria.grid(row=2, column=2, pady=10, ipadx=40)
         
         #Botao inicia a pesquisa
-        self.botaoIniciaPesquisa = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa', command=self.coletaDadosParaPesquisa)
+        self.botaoIniciaPesquisa = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa de Anuncios', command=self.coletaDadosParaPesquisa)
         self.botaoIniciaPesquisa.grid(row=3, column=2, pady=10)
         
         #Botao inicia pesquisa anunciante
-        self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Pesquisa Anunciante', command=self.coletaDadosAnuncianteML)
+        self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa de Anunciante', command=self.coletaDadosAnuncianteML)
         self.botaoiniciaPesquisaAnunciante.grid(row=4, column=2, pady=10)
         
         #Botao voltar pagina inicial
