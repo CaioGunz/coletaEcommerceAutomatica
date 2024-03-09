@@ -17,14 +17,16 @@ class janelas:
         self.root = root
         self.root.title('Gunz Program')
         
+        #Titulo Geral do aplicativo (Pagina Inicial)
+        self.tituloAbaGeral = customtkinter.CTkLabel(self.root, text='WebScraping Ecommerce', font=('Arial', 24))
+        self.tituloAbaGeral.place(x=110, y=20)
+        
         #Botao para acessar a janela de Pesquisa anuncios mercado livre
         self.botaoPesquisaML = customtkinter.CTkButton(self.root, text='Pesquisa Mercado Livre', width=155, command=self.pesquisaMercadoLivre)
-        #self.botaoPesquisaML.grid(row=1, column=2, pady=10, padx=170)
         self.botaoPesquisaML.place(x=170, y=95)
         
         #Botao para acessar a janela Pesquisa Amazon
         self.botaoAmazon = customtkinter.CTkButton(self.root, text='Pesquisa Amazon', width=155, command=self.alertaBotaoPesquisaAmazon)
-        #self.botaoAmazon.grid(row=2, column=2, pady=10, padx=170)
         self.botaoAmazon.place(x=170, y=150)
     
     #Funcao que cria a janela de pesquisa do mercado livre        
@@ -39,33 +41,41 @@ class janelas:
         self.rootPesquisaML.geometry('500x300')
         self.iconeJanelas(root=self.rootPesquisaML)
         
+        #Titulo geral da pagina do Mercado Livre
+        self.tituloAbaMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='WebScraping Mercado Livre', font=('Arial', 24))
+        self.tituloAbaMercadoLivre.place(x=110, y=20)
+        
+        #Label para vazio e assim posicionar o titulo corretamente
+        self.vazioMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='')
+        self.vazioMercadoLivre.grid(row=1, column=1, pady=10)
+        
         #Label para entrada de link
         self.labelEntradaDeLink = customtkinter.CTkLabel(self.rootPesquisaML, text='Insira o Link aqui', font=('Arial', 12, 'bold'))
-        self.labelEntradaDeLink.grid(row=1, column=1, pady=10)
+        self.labelEntradaDeLink.grid(row=2, column=1, pady=10)
         
         #Entry Entrada de link
         self.inputEntradaLink = customtkinter.CTkEntry(self.rootPesquisaML)
-        self.inputEntradaLink.grid(row=1, column=2, pady=10, ipadx=70)
+        self.inputEntradaLink.grid(row=2, column=2, pady=10, ipadx=70)
         
         #Label para coleta da categoria
         self.labelColetaCategoria = customtkinter.CTkLabel(self.rootPesquisaML, text='Insira a categoria pesquisada', font=('Arial', 12, 'bold'))
-        self.labelColetaCategoria.grid(row=2, column=1, pady=10, padx=5)
+        self.labelColetaCategoria.grid(row=3, column=1, pady=10, padx=5)
         
         #Input Coleta Categoria
         self.inpuColetaCategoria = customtkinter.CTkEntry(self.rootPesquisaML)
-        self.inpuColetaCategoria.grid(row=2, column=2, pady=10, ipadx=40)
+        self.inpuColetaCategoria.grid(row=3, column=2, pady=10, ipadx=40)
         
         #Botao inicia a pesquisa
         self.botaoIniciaPesquisa = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa de Anuncios', command=self.coletaDadosParaPesquisa)
-        self.botaoIniciaPesquisa.grid(row=3, column=2, pady=10)
+        self.botaoIniciaPesquisa.grid(row=4, column=2, pady=10)
         
         #Botao inicia pesquisa anunciante
         self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa de Anunciante', command=self.coletaDadosAnuncianteML)
-        self.botaoiniciaPesquisaAnunciante.grid(row=4, column=2, pady=10)
+        self.botaoiniciaPesquisaAnunciante.grid(row=5, column=2, pady=10)
         
         #Botao voltar pagina inicial
         self.botaoVoltaPaginaInicial = customtkinter.CTkButton(self.rootPesquisaML, text='Volta Pagina Inicial', command=self.voltarPaginaInicial)
-        self.botaoVoltaPaginaInicial.grid(row=5, column=1, pady=10)
+        self.botaoVoltaPaginaInicial.grid(row=6, column=1, pady=10)
    
     #Funcao para gerar o alerta no botao de pesquisa Amazon
     def alertaBotaoPesquisaAmazon(self):
