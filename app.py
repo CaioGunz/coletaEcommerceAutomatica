@@ -77,7 +77,6 @@ class janelas:
         self.rootPesquisaML.resizable(width=False, height=False)
         self.rootPesquisaML.geometry('500x300')
         self.iconeJanelas(root=self.rootPesquisaML)
-        self.apperance(root=self.rootPesquisaML)
                 
         #Titulo geral da pagina do Mercado Livre
         self.tituloAbaMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='WebScraping Mercado Livre', font=('Arial', 24))
