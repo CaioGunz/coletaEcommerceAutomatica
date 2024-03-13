@@ -24,14 +24,12 @@ class janelas:
         
         #Botao para acessar a janela de Pesquisa anuncios mercado livre
         self.botaoPesquisaML = customtkinter.CTkButton(self.root, text='Pesquisa Mercado Livre', width=155, command=self.pesquisaMercadoLivre,
-                                                       corner_radius= 32, fg_color='transparent',
-                                                        hover_color='#47494d', border_color='#008584', border_width=2, text_color='#75787d')
+                                                       corner_radius= 32, fg_color='#008584')
         self.botaoPesquisaML.place(x=170, y=95)
         
         #Botao para acessar a janela Pesquisa Amazon
         self.botaoAmazon = customtkinter.CTkButton(self.root, text='Pesquisa Amazon', width=170, command=self.alertaBotaoPesquisaAmazon,
-                                                       corner_radius= 32, fg_color='transparent',
-                                                        hover_color='#47494d', border_color='#008584', border_width=2, text_color='#75787d')
+                                                       corner_radius= 32, fg_color='#008584')
         self.botaoAmazon.place(x=170, y=150)
         
         self.apperance(root=self.root)
@@ -91,7 +89,7 @@ class janelas:
         self.labelEntradaDeLink.grid(row=2, column=1, pady=10)
         
         #Entry Entrada de link
-        self.inputEntradaLink = customtkinter.CTkEntry(self.rootPesquisaML)
+        self.inputEntradaLink = customtkinter.CTkEntry(self.rootPesquisaML, placeholder_text="Ex: https://www.mercadolivre.com", border_color='#008584')
         self.inputEntradaLink.grid(row=2, column=2, pady=10, ipadx=70)
         
         #Label para coleta da categoria
@@ -99,25 +97,22 @@ class janelas:
         self.labelColetaCategoria.grid(row=3, column=1, pady=10, padx=5)
         
         #Input Coleta Categoria
-        self.inpuColetaCategoria = customtkinter.CTkEntry(self.rootPesquisaML)
+        self.inpuColetaCategoria = customtkinter.CTkEntry(self.rootPesquisaML, placeholder_text="Ex: Celulares", border_color='#008584')
         self.inpuColetaCategoria.grid(row=3, column=2, pady=10, ipadx=40)
         
         #Botao inicia a pesquisa
         self.botaoIniciaPesquisa = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa de Anuncios', command=self.coletaDadosParaPesquisa,
-                                                       corner_radius= 32, fg_color='transparent',
-                                                        hover_color='#47494d', border_color='#008584', border_width=2, text_color='#75787d')
+                                                       corner_radius= 32, fg_color='#008584')
         self.botaoIniciaPesquisa.grid(row=4, column=2, pady=10)
         
         #Botao inicia pesquisa anunciante
         self.botaoiniciaPesquisaAnunciante = customtkinter.CTkButton(self.rootPesquisaML, text='Inicia Pesquisa de Anunciante', command=self.coletaDadosAnuncianteML,
-                                                       corner_radius= 32, fg_color='transparent',
-                                                        hover_color='#47494d', border_color='#008584', border_width=2, text_color='#75787d')
+                                                       corner_radius= 32, fg_color='#008584')
         self.botaoiniciaPesquisaAnunciante.grid(row=5, column=2, pady=10)
         
         #Botao voltar pagina inicial
         self.botaoVoltaPaginaInicial = customtkinter.CTkButton(self.rootPesquisaML, text='Volta Pagina Inicial', command=self.voltarPaginaInicial,
-                                                       corner_radius= 32, fg_color='transparent',
-                                                        hover_color='#47494d', border_color='#008584', border_width=2, text_color='#75787d')
+                                                       corner_radius= 32, fg_color='#008584')
         self.botaoVoltaPaginaInicial.grid(row=6, column=2, pady=10)
    
     #Funcao para gerar o alerta no botao de pesquisa Amazon
