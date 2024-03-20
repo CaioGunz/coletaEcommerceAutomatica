@@ -2,6 +2,7 @@
 import os
 import tkinter as tk
 import customtkinter
+import sys
 from tkinter import messagebox
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
 from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteMl
@@ -114,6 +115,18 @@ class janelas:
         self.botaoVoltaPaginaInicial = customtkinter.CTkButton(self.rootPesquisaML, text='Volta Pagina Inicial', command=self.voltarPaginaInicial,
                                                        corner_radius= 32, fg_color='#008584')
         self.botaoVoltaPaginaInicial.grid(row=6, column=2, pady=10)
+        
+        #Adiciona o protocolo de encerramento do sistema pela janela de pesquisa Mercado Livre
+        self.rootPesquisaML.protocol("WM_DELETE_WINDOW", self.confirmarSaida)
+    
+    
+    def confirmarSaida(self):
+    # Pergunta ao usuário se deseja realmente sair
+        if messagebox.askokcancel("Sair", "Deseja encerrar? :("):
+            # Se o usuário confirmar, fecha a janela de pesquisa
+            self.rootPesquisaML.destroy()
+            # Encerra o sistema
+            sys.exit()
    
     #Funcao para gerar o alerta no botao de pesquisa Amazon
     def alertaBotaoPesquisaAmazon(self):
