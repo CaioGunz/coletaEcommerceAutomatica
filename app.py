@@ -3,7 +3,8 @@ import os
 import tkinter as tk
 import customtkinter
 import sys
-from tkinter import messagebox
+from PIL import Image, ImageTk
+from tkinter import messagebox, Label, PhotoImage
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
 from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteMl
 from classes.chamaDriver.chamaDriver import iniciaDriver
@@ -11,6 +12,8 @@ from classes.chamaDriver.chamaDriver import iniciaDriver
 
 
 class janelas:
+    
+    janela_de_ajuda_aberta = False
     
     #Funcao __init__ que cria a primeira e principal janela do sistema com botoes
     def __init__(self, root):
@@ -33,6 +36,11 @@ class janelas:
                                                        corner_radius= 32, fg_color='#008584')
         self.botaoAmazon.place(x=170, y=150)
         
+        #Botao para acessar a janela de Ajuda
+        self.botaoHelp = customtkinter.CTkButton(self.root, text="❔", command=self.telaHelp, width=10, height=10, fg_color='#008485', 
+                                                hover_color='#008584', border_color='#fff', corner_radius=50, text_color='#fff')
+        self.botaoHelp.place(x=460, y=10)
+        
         self.apperance(root=self.root)
         
     #Função para setar a aparencia do sistema
@@ -40,30 +48,17 @@ class janelas:
                     
         #Label com o nome Tema
         self.escritaModoAparencia = customtkinter.CTkLabel(root, bg_color='transparent', text_color=['#000', '#fff'], text="Tema:")
-        self.escritaModoAparencia.place(x=50, y=230)
+        self.escritaModoAparencia.place(x=10, y=230)
         
         #Lista com as 3 opcoes de temas: Dark, Light e System
         self.listaModoAparencia = customtkinter.CTkOptionMenu(root, values=['System', 'Dark', 'Light'], command=self.change_apm, corner_radius=32, fg_color='#008584')
-        self.listaModoAparencia.place(x=50, y=260)
+        self.listaModoAparencia.place(x=10, y=260)
     
     #Funcao de comando para o botao de tema do sistema
     def change_apm(self, nova_aparencia):
         #Instancia novo tema
         customtkinter.set_appearance_mode(nova_aparencia)
-        
-        #Funcao para setar o icone em cada janela aberta
-    def iconeJanelas(self, root):
-        #Procura o icone usando a lib os
-        icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'icon', 'Gunz-3.ico')
-        if os.path.exists(icon_path):
-            try:
-                #Adiciona o icone na janela aberta
-                root.iconbitmap(icon_path)
-            except Exception as e:
-                print(f'Erro ao carregar o icone: {e}')
-        else:
-            print(f'Error: O arquivo do icone nao foi encontrado no caminho: {icon_path}')
-            print('Verificar com o Administrador do Sistema')      
+            
     
     #Funcao que cria a janela de pesquisa do mercado livre        
     def pesquisaMercadoLivre(self):
@@ -76,7 +71,7 @@ class janelas:
         self.rootPesquisaML.resizable(width=False, height=False)
         self.rootPesquisaML.geometry('500x300')
         self.iconeJanelas(root=self.rootPesquisaML)
-                
+        
         #Titulo geral da pagina do Mercado Livre
         self.tituloAbaMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='WebScraping Mercado Livre', font=('Arial', 24))
         self.tituloAbaMercadoLivre.place(x=110, y=20)
@@ -119,6 +114,27 @@ class janelas:
         #Adiciona o protocolo de encerramento do sistema pela janela de pesquisa Mercado Livre
         self.rootPesquisaML.protocol("WM_DELETE_WINDOW", self.confirmarSaida)
     
+    def telaHelp(self, event=None):
+
+        if self.janela_de_ajuda_aberta:
+            # Fecha a janela de ajuda se já estiver aberta
+            self.janhelaHelp.destroy()
+            # Altera o estado da variável de controle
+            self.janela_de_ajuda_aberta = False
+        else:
+            # Cria a janela de ajuda se não estiver aberta
+            self.janhelaHelp = customtkinter.CTkToplevel(self.root)
+            self.janhelaHelp.title('Ajuda')
+            self.janhelaHelp.resizable(width=False, height=False)
+            self.janhelaHelp.geometry('500x300')
+            self.iconeJanelas(root=self.janhelaHelp)
+
+            # Conteúdo da janela de ajuda...
+            label = customtkinter.CTkLabel(self.janhelaHelp, text="Conteúdo da janela de ajuda...")
+            label.pack()
+
+            # Altera o estado da variável de controle
+            self.janela_de_ajuda_aberta = True
     
     def confirmarSaida(self):
     # Pergunta ao usuário se deseja realmente sair
@@ -148,13 +164,25 @@ class janelas:
         pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
         pesquisaAnuncio.coletaAnunciosML()
     
+    #Funcao para setar o icone em cada janela aberta
+    def iconeJanelas(self, root):
+        #Procura o icone usando a lib os
+        icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'Gunz-3.ico')
+        if os.path.exists(icon_path):
+            try:
+                #Adiciona o icone na janela aberta
+                root.iconbitmap(icon_path)
+            except Exception as e:
+                print(f'Erro ao carregar o icone: {e}')
+        else:
+            print(f'Error: O arquivo do icone nao foi encontrado no caminho: {icon_path}')
+            print('Verificar com o Administrador do Sistema')  
+
     #Funcao dos botoes de voltar para pagina inicial 
     def voltarPaginaInicial(self):
         self.rootPesquisaML.destroy()
         
         self.root.deiconify()
-        
-  
     
 #Funcao main para iniciar o sistema
 def main():
@@ -165,7 +193,7 @@ def main():
     root.resizable(width=False, height=False)
     #Define o tamanho da janela
     root.geometry('500x300')
-    icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'icon', 'Gunz-3.ico')
+    icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'Gunz-3.ico')
     if os.path.exists(icon_path):
         try:
             #Adiciona o icone na janela aberta
