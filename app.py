@@ -3,8 +3,8 @@ import os
 import tkinter as tk
 import customtkinter
 import sys
-from PIL import Image, ImageTk
-from tkinter import messagebox, Label, PhotoImage
+import webbrowser
+from tkinter import messagebox
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
 from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteMl
 from classes.chamaDriver.chamaDriver import iniciaDriver
@@ -117,24 +117,37 @@ class janelas:
     def telaHelp(self, event=None):
 
         if self.janela_de_ajuda_aberta:
-            # Fecha a janela de ajuda se já estiver aberta
+            #Fecha a janela de ajuda se já estiver aberta
             self.janhelaHelp.destroy()
-            # Altera o estado da variável de controle
+            #Altera o estado da variável de controle
             self.janela_de_ajuda_aberta = False
         else:
-            # Cria a janela de ajuda se não estiver aberta
+            #Cria a janela de ajuda se não estiver aberta
             self.janhelaHelp = customtkinter.CTkToplevel(self.root)
-            self.janhelaHelp.title('Ajuda')
+            self.janhelaHelp.title('Sobre')
             self.janhelaHelp.resizable(width=False, height=False)
             self.janhelaHelp.geometry('500x300')
             self.iconeJanelas(root=self.janhelaHelp)
 
-            # Conteúdo da janela de ajuda...
-            label = customtkinter.CTkLabel(self.janhelaHelp, text="Conteúdo da janela de ajuda...")
-            label.pack()
+            #Label sobre a versao do app
+            self.labelInformacaoWebScraping = customtkinter.CTkLabel(self.janhelaHelp, text="WebScraping E-Commerce - ver 1.0", font=('Arial', 16, 'bold'))
+            self.labelInformacaoWebScraping.pack(pady=(80, 0))
+            #Label sobre o autor do sistema
+            self.labelInformacaoDesenvolvedor = customtkinter.CTkLabel(self.janhelaHelp, text="Desenvolvido por Caio Araujo Ⓒ", font=('Arial', 14))
+            self.labelInformacaoDesenvolvedor.pack(pady=(0, 10))
+            
+            #Botão que encaminho para o Github
+            self.botaoGithubSobre = customtkinter.CTkButton(self.janhelaHelp, image='icones/github.png', command=self.goGithub, corner_radius= 32, fg_color='#008584')
+            self.botaoGithubSobre.pack(pady=(20, 0))
 
-            # Altera o estado da variável de controle
+            #Define a janela de ajuda como modal
+            self.janhelaHelp.grab_set()
+
+            #Altera o estado da variável de controle
             self.janela_de_ajuda_aberta = True
+
+    def goGithub(self):
+        webbrowser.open('https://github.com/CaioGunz/')
     
     def confirmarSaida(self):
     # Pergunta ao usuário se deseja realmente sair
