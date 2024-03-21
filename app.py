@@ -4,7 +4,9 @@ import tkinter as tk
 import customtkinter
 import sys
 import webbrowser
-from tkinter import messagebox
+import warnings
+from PIL import Image, ImageTk
+from tkinter import messagebox, PhotoImage, Frame
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
 from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteMl
 from classes.chamaDriver.chamaDriver import iniciaDriver
@@ -136,18 +138,55 @@ class janelas:
             self.labelInformacaoDesenvolvedor = customtkinter.CTkLabel(self.janhelaHelp, text="Desenvolvido por Caio Araujo Ⓒ", font=('Arial', 14))
             self.labelInformacaoDesenvolvedor.pack(pady=(0, 10))
             
-            #Botão que encaminho para o Github
-            self.botaoGithubSobre = customtkinter.CTkButton(self.janhelaHelp, image='icones/github.png', command=self.goGithub, corner_radius= 32, fg_color='#008584')
-            self.botaoGithubSobre.pack(pady=(20, 0))
+            warnings.filterwarnings("ignore", category=UserWarning)
+            
+            # Icone do Github 
+            imagemGitHub = Image.open('assets/GitHub.png')
+            imagemGitHub = imagemGitHub.resize((30, 30))
+            self.imagemGitHubPronta = ImageTk.PhotoImage(imagemGitHub)
+
+            # Botao para acessar o Github
+            self.botaoGithub = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemGitHubPronta, command=self.acesseGithub,
+                                           corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
+            self.botaoGithub.pack(pady=(10, 0), side='left')
+
+            # Icone do LinkedIn 
+            imagemLinkedin = Image.open('assets/linkedin.png')
+            imagemLinkedin = imagemLinkedin.resize((30, 30))
+            self.imagemLinkedinPronta = ImageTk.PhotoImage(imagemLinkedin)
+
+            # Botao para acessar o LinkedIn
+            self.botaoLinkedin = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemLinkedinPronta, command=self.acesseLinkedin,
+                                             corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
+            self.botaoLinkedin.pack(pady=(10, 0), side='left')
+
+            # Icone do Portfolio 
+            imagemPortfolio = Image.open('assets/portfolio.png')
+            imagemPortfolio = imagemPortfolio.resize((30, 30))
+            self.imagemPortfolioPronta = ImageTk.PhotoImage(imagemPortfolio)
+
+            # Botao para acessar o Portfolio
+            self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPortfolioPronta, command=self.acessePortfolio,
+                                              corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
+            self.botaoPortfolio.pack(pady=(10, 0), side='left')
+
+            warnings.filterwarnings("default", category=UserWarning)
 
             #Define a janela de ajuda como modal
             self.janhelaHelp.grab_set()
 
             #Altera o estado da variável de controle
             self.janela_de_ajuda_aberta = True
-
-    def goGithub(self):
-        webbrowser.open('https://github.com/CaioGunz/')
+            
+    
+    def acesseGithub(self):
+        webbrowser.open('https://github.com/CaioGunz')
+        
+    def acesseLinkedin(self):
+        webbrowser.open('https://www.linkedin.com/in/caiobarbosadearaujo/')
+        
+    def acessePortfolio(self):
+        webbrowser.open('https://caiogunz.github.io/portfolio-curriculo/')
     
     def confirmarSaida(self):
     # Pergunta ao usuário se deseja realmente sair
