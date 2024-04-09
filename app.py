@@ -135,7 +135,7 @@ class janelas:
             self.labelInformacaoWebScraping = customtkinter.CTkLabel(self.janhelaHelp, text="WebScraping E-Commerce - ver 1.0", font=('Arial', 16, 'bold'))
             self.labelInformacaoWebScraping.pack(pady=(80, 0))
             #Label sobre o autor do sistema
-            self.labelInformacaoDesenvolvedor = customtkinter.CTkLabel(self.janhelaHelp, text="Desenvolvido por Caio Araujo Ⓒ", font=('Arial', 14))
+            self.labelInformacaoDesenvolvedor = customtkinter.CTkLabel(self.janhelaHelp, text="Desenvolvido por Caio Araujo Ⓒ - 2024", font=('Arial', 14))
             self.labelInformacaoDesenvolvedor.pack(pady=(0, 10))
             
             warnings.filterwarnings("ignore", category=UserWarning)
@@ -148,7 +148,7 @@ class janelas:
             # Botao para acessar o Github
             self.botaoGithub = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemGitHubPronta, command=self.acesseGithub,
                                            corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoGithub.pack(pady=(10, 0), side='left')
+            self.botaoGithub.pack(padx=(155, 0), side='left')
 
             # Icone do LinkedIn 
             imagemLinkedin = Image.open('assets/linkedin.png')
@@ -158,7 +158,7 @@ class janelas:
             # Botao para acessar o LinkedIn
             self.botaoLinkedin = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemLinkedinPronta, command=self.acesseLinkedin,
                                              corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoLinkedin.pack(pady=(10, 0), side='left')
+            self.botaoLinkedin.pack(padx=(30, 0), side='left')
 
             # Icone do Portfolio 
             imagemPortfolio = Image.open('assets/portfolio.png')
@@ -168,7 +168,7 @@ class janelas:
             # Botao para acessar o Portfolio
             self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPortfolioPronta, command=self.acessePortfolio,
                                               corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoPortfolio.pack(pady=(10, 0), side='left')
+            self.botaoPortfolio.pack(padx=(30, 0), side='left')
 
             warnings.filterwarnings("default", category=UserWarning)
 

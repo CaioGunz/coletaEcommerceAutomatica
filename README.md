@@ -7,9 +7,15 @@ As telas são divididas em uma tela principal, uma tela para cada tipo de pesqui
 
 ![Tela Inicial](/assets/paginaInicial.png)
 
-Tela Pesquisa Mercado Livre:
+**Tela Sobre:**
 
-Tela Pesquisa Amazon:
+![Tela sobre o aplicativo](/assets/telaSobre.png)
+
+**Tela Pesquisa Mercado Livre:**
+
+![Tela Mercado Livre](/assets/telaMercadoLivre.png)
+
+**Tela Pesquisa Amazon:**
 
 Está em construção!!
 
@@ -26,8 +32,17 @@ Para usar o aplicativo você deve escolher primeiramente qual pesquisa de ecomme
     ![Tela de pesquisa Mercado Livre](/assets/mercadoLivreAnunciosExemplo.png)
     *Imagen Ilustrativa
 
-    Está página contém varios anúncios então a primeira etapa é fazer esta pesquisa e coletar este {c:red}link{/c} que esta entre vermelho (Deve ser o link da sua pesquisa e não igual a imagem)
+    Está página contém varios anúncios então a primeira etapa é fazer esta pesquisa e coletar este **link** que esta entre vermelho (Deve ser o link da sua pesquisa e não igual a imagem)
 
-2. o próximo passo é inserir esse link no local correspondente a pesquisa no aplicativo, na imagem a seguir mostra o local correto:
+2. O próximo passo é inserir esse link no local correspondente a pesquisa no aplicativo, na imagem a seguir mostra o local correto:
+    ![Local Link Mercado Livre](/assets/localLinkMercadoLivre.png)
+
+3. Após inserido o link você deve colocar a qual **categoria** o produto pesquisado pertence. **Exemplo: SMARTPHONE** para uma pesquisa sobre celulares. Na imagem a seguir mostra o local onde deve ser escrito a categoria:
+
+    ![Local categoria Mercado Livre](/assets/localCategoriaMercadoLivre.png)
+
+4. Feito os passos anteriores basta clicar no botão de **Inicia Pesquisa de Anuncios** para iniciar a pesquisa dos anúncios em todas as páginas. Botão na foto a seguir:
+
+    ![Botão Pesquisa Anuncios](/assets/botaoPesquisaAnunciosMercadoLivre.png)
 
 
