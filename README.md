@@ -45,4 +45,9 @@ Para usar o aplicativo você deve escolher primeiramente qual pesquisa de ecomme
 
     ![Botão Pesquisa Anuncios](/assets/botaoPesquisaAnunciosMercadoLivre.png)
 
+Com isso ira iniciar a pesquisa e quando terminar vai gerar um **CVS** com o nome de **pesquisaAnunciosMercadoLivre.csv** com os anuncios coletados e a categoria no formato: **link;categoria**
+
+### Pesquisa Anunciante
+
+
 

@@ -169,6 +169,20 @@ class janelas:
             self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPortfolioPronta, command=self.acessePortfolio,
                                               corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
             self.botaoPortfolio.pack(padx=(30, 0), side='left')
+            
+            #Label para doacao
+            self.labelDoacaoPix = customtkinter.CTkLabel(self.janhelaHelp, text="Doe um Pix", font=('Arial', 14, 'bold'))
+            self.labelDoacaoPix.pack(pady=(0, 0))
+            
+            # Icone do Pix 
+            imagemPix = Image.open('assets/qrCodePix.png')
+            imagemPix = imagemPix.resize((100, 100))
+            self.imagemPix = ImageTk.PhotoImage(imagemPix)
+
+            # Botao para acessar o Pix
+            self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPix, command=self.doacaoPix,
+                                              corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
+            self.botaoPortfolio.pack(padx=(30, 0), side='left')
 
             warnings.filterwarnings("default", category=UserWarning)
 
@@ -187,6 +201,9 @@ class janelas:
         
     def acessePortfolio(self):
         webbrowser.open('https://caiogunz.github.io/portfolio-curriculo/')
+    
+    def doacaoPix(self):
+        webbrowser.open('https://nubank.com.br/cobrar/enynq/661554fa-a284-4ee1-b85c-99e97e21bdc5')
     
     def confirmarSaida(self):
     # Pergunta ao usuário se deseja realmente sair
