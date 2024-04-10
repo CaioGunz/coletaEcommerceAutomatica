@@ -2,18 +2,21 @@
 
 <a name="ancora"></a>
 ## Navegação
-- [Sobre o Aplicativo](#ancora1)
-- [Imagens do aplicativo](#ancora2)
-- [Modo de usar](#ancora3)
-- [Pesquisa Mercado Livre](#ancora4)
+- [1 Sobre o Aplicativo](#sobre)
+- [2 Imagens do aplicativo](#imagensAplicativo)
+- [3 Modo de usar](#modoDeUsar)
+- [4 Pesquisa Mercado Livre](#pesquisaMercadoLivre)
+    - [4.1 Pesquisa Anuncios](#pesquisaAnunciosMercadoLivre)
+    - [4.2 Pesquisa Anunciante](#pesquisaAnuncianteMercadoLivre)
 
-<a id="ancora1"></a>
+
+<a id="sobre"></a>
 ## Sobre o Aplicativo
 
 Este projeto foi feito para realizar a coleta de dados de anuncios e anunciantes dos principais Ecommerces do Brasil que são **Mercado Livre, Amazon e Shopee**. No momento temos apenas a pagina do Mercado Livre funcionando.
 
 
-<a id="ancora2"></a>
+<a id="imagensAplicativo"></a>
 ## Imagens do Aplicativo
 
 As telas são divididas em uma tela principal, uma tela para cada tipo de pesquisa e uma tela de help com informações do App:
@@ -34,14 +37,15 @@ As telas são divididas em uma tela principal, uma tela para cada tipo de pesqui
 
 Está em construção!!
 
-<a id="ancora3"></a>
+<a id="modoDeUsar"></a>
 # Modo de usar o aplicativo
 
-Para usar o aplicativo você deve escolher primeiramente qual pesquisa de ecommerce vai fazer.
+Para usar o aplicativo você deve escolher primeiramente qual pesquisa de ecommerce vai fazer. Lembrando que os arquivos gerados nessa pesquisa vai estar dentro da pasta mãe do aplicativo.
 
-<a id="ancora4"></a>
+<a id="pesquisaMercadoLivre"></a>
 ## Pesquisa Mercado Livre
 
+<a id="pesquisaAnunciosMercadoLivre"></a>
 ### Pesquisa de Anúncios
 
 Para iniciar a pesquisa de anúncios você deve seguir os passos abaixo.
@@ -67,9 +71,12 @@ Para iniciar a pesquisa de anúncios você deve seguir os passos abaixo.
 
 Com isso ira iniciar a pesquisa e quando terminar vai gerar um **CVS** com o nome de **pesquisaAnunciosMercadoLivre.csv** com os anuncios coletados e a categoria no formato: **link;categoria**
 
+<a id="pesquisaAnuncianteMercadoLivre"></a>
 ### Pesquisa Anunciante
 
-Para iniciar a pesquisa de anunciantes você deve seguir o passo a passo da pesquisa de anuncios que vai gerar um arquivo **CSV** e com este arquivo gerado vai ser realizada a pesquisa de cada pagina de anúncio que foi coletado no processo anterior. Essa pesquisa vai gerar um **CSV** com as seguintes colunas coletadas da página: ***titulo;preco;qtdVendida;linkVendedor;classificacaoVendedor;marca;sku;categoria;link***. Com essas informações é possivel gerar análise de como sua marca está no ecommerce
+Para iniciar a pesquisa de anunciantes você deve seguir o passo a passo da pesquisa de anuncios que vai gerar um arquivo **CSV** e com este arquivo gerado vai ser realizada a pesquisa de cada pagina de anúncio que foi coletado no processo anterior. 
+
+Essa pesquisa vai gerar um **CSV** com as seguintes colunas coletadas da página: ***titulo;preco;qtdVendida;linkVendedor;classificacaoVendedor;marca;sku;categoria;link***. Com essas informações é possivel gerar análise de como sua marca está no ecommerce
 
 1. Para inicar a pesquisa de anunciantes você deve checar a existência do arquivo **pesquisaAnunciosMercadoLivre.csv** e caso ele exista e esteja correto basta clicar no botão **Inicia Pesquisa de Anunciante** para dar inicio a pesquisa da pagina. A foto a seguir mostra qual botão deve ser clicado:
 
@@ -79,6 +86,14 @@ Para iniciar a pesquisa de anunciantes você deve seguir o passo a passo da pesq
 
     ![Pagina de anunciante exemplo](/assets/paginaAnuncianteMercadoLivre.png)
     Este é um exemplo da página que vai ser mapeada na pesquisa (Imagem Ilustrativa).
+
+    Exemplo do CSV gerado na Pesquisa de Anunciante:
+
+    ![Exemplo Pesquisa de Anunciante CSV](/assets/exemploPesquisaAnuncianteMercadoLivre.png)
+
+    Este é um exemplo de como vai ser o CSV depois de gerado(Imagem Ilustrativa).
+
+    Como você pode verificar na imagem acima, é importante fazer uma limpeza nos dados por conta de alguns dados estarem preenchidos de forma incorreta no site do Mercado Livre, como por exemplo algumas pontuações fora de ordem ou erradas principalmente nas colunas **MARCA E SKU**, então pode ser necessario uma limpeza e validação dos dados para que não ocorra problemas na análise.
 
 
 
