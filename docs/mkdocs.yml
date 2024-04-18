@@ -1,0 +1,6 @@
+site_name: Webscraping E-commerce
+site_url:  https://webscraping-gunz-sistem.com/
+
+
+theme:
+    name: readthedocs
