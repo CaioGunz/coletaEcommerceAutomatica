@@ -1,5 +1,7 @@
 site_name: Webscraping E-commerce
 site_url:  https://webscraping-gunz-sistem.com/
+site_dir: _site
+
 
 
 theme:
