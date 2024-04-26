@@ -6,7 +6,7 @@
 Este projeto foi feito para realizar a coleta de dados de anuncios e anunciantes dos principais Ecommerces do Brasil que são **Mercado Livre, Amazon e Shopee**. No momento temos apenas a pagina do Mercado Livre funcionando.
 
 <a id="baixar"></a>
-# Como baixar e instalar(usar):
+## Como baixar e instalar(usar):
 
 Para baixar os arquivos você deve seguir os seguintes passos:
 
