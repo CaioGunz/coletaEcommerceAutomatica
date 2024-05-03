@@ -5,6 +5,7 @@ import customtkinter
 import sys
 import webbrowser
 import warnings
+from tkinter import filedialog
 from PIL import Image, ImageTk
 from tkinter import messagebox, PhotoImage, Frame
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
@@ -60,7 +61,6 @@ class janelas:
     def change_apm(self, nova_aparencia):
         #Instancia novo tema
         customtkinter.set_appearance_mode(nova_aparencia)
-            
     
     #Funcao que cria a janela de pesquisa do mercado livre        
     def pesquisaMercadoLivre(self):
@@ -116,6 +116,7 @@ class janelas:
         #Adiciona o protocolo de encerramento do sistema pela janela de pesquisa Mercado Livre
         self.rootPesquisaML.protocol("WM_DELETE_WINDOW", self.confirmarSaida)
     
+    #Funcao que cra uma janela de Help com informações do sistema
     def telaHelp(self, event=None):
 
         if self.janela_de_ajuda_aberta:
@@ -139,6 +140,11 @@ class janelas:
             self.labelInformacaoDesenvolvedor.pack(pady=(0, 10))
             
             warnings.filterwarnings("ignore", category=UserWarning)
+            
+            # Botao para acessar a Documentacao
+            self.botaoGithub = customtkinter.CTkButton(self.janhelaHelp, text='Documentação📃', command=self.acesseDocumentacao,
+                                           corner_radius=32, fg_color='transparent', hover_color='#008485', height=0, width=0, font=('Arial', 14, 'bold'))
+            self.botaoGithub.pack(padx=(0, 0), side='top')
             
             # Icone do Github 
             imagemGitHub = Image.open('assets/GitHub.png')
@@ -180,9 +186,9 @@ class janelas:
             self.imagemPix = ImageTk.PhotoImage(imagemPix)
 
             # Botao para acessar o Pix
-            self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPix, command=self.doacaoPix,
+            self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPix, command=self.acesseDoacaoPix,
                                               corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoPortfolio.pack(padx=(30, 0), side='left')
+            self.botaoPortfolio.pack(padx=(50, 0), side='left')
 
             warnings.filterwarnings("default", category=UserWarning)
 
@@ -192,19 +198,27 @@ class janelas:
             #Altera o estado da variável de controle
             self.janela_de_ajuda_aberta = True
             
-    
+    #Funcao com o link do GitHub    
     def acesseGithub(self):
         webbrowser.open('https://github.com/CaioGunz')
-        
+    
+    #Funcao com o link do LinkedIn        
     def acesseLinkedin(self):
         webbrowser.open('https://www.linkedin.com/in/caiobarbosadearaujo/')
-        
+    
+    #Funcao com o link do Portfolio        
     def acessePortfolio(self):
         webbrowser.open('https://caiogunz.github.io/portfolio-curriculo/')
     
-    def doacaoPix(self):
+    #Funcao com o link do PIX
+    def acesseDoacaoPix(self):
         webbrowser.open('https://nubank.com.br/cobrar/enynq/661554fa-a284-4ee1-b85c-99e97e21bdc5')
+
+    #Funcao com o link da Documentacao
+    def acesseDocumentacao(self):
+        webbrowser.open('https://caiogunz.github.io/coletaEcommerceAutomatica/')
     
+    #Funcao para perguntar ao usuario se ele deseja encerrar o sistema
     def confirmarSaida(self):
     # Pergunta ao usuário se deseja realmente sair
         if messagebox.askokcancel("Sair", "Deseja encerrar? :("):
@@ -215,13 +229,18 @@ class janelas:
    
     #Funcao para gerar o alerta no botao de pesquisa Amazon
     def alertaBotaoPesquisaAmazon(self):
-       messagebox.showinfo(title="Alerta!!", message='Pagina em construcao !!')
-   
+        messagebox.showinfo(title="Alerta!!", message='Pagina em construcao !!')
    
    #Funcao para iniciar a pesquisa de Anunciantes onde o comando é chamado no botaoiniciaPesquisaAnunciante
     def coletaDadosAnuncianteML(self):
-        pesquisaAnunciante = pesquisaAnuncianteMl(link='', categoria='')
-        pesquisaAnunciante.pegaLink()
+        
+        # Abrir a janela de seleção de arquivo
+        file_path = filedialog.askopenfilename(filetypes=[("CSV Files", "*.csv")])
+
+        if file_path:
+            # Chamada para iniciar a pesquisa com o arquivo selecionado
+            pesquisaAnunciante = pesquisaAnuncianteMl(link='', categoria='')
+            pesquisaAnunciante.pegaLink()
     
     #Funcao para iniciar a coleta de dados e iniciar a pesquisa baseado no link e categoria do input na pagina root
     def coletaDadosParaPesquisa(self):
@@ -229,9 +248,19 @@ class janelas:
         linkColetado = self.inputEntradaLink.get()
         categoria = self.inpuColetaCategoria.get()
         
-        #Chama a funcao de coletaAnunciosML com oo link e categoria selecionado
-        pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
-        pesquisaAnuncio.coletaAnunciosML()
+        #Define o nome do arquivo padrão
+        default_file_name = 'pesquisaAnunciosMercadoLivre.csv'
+        
+        # Abre a janela de seleção de arquivo para salvar o arquivo a ser pesquisado
+        file_path = filedialog.asksaveasfilename(defaultextension=".csv", initialfile=default_file_name, filetypes=[("CSV Files", "*.csv")])
+        if file_path:
+            
+            #Atualiza o nome do arquivo com o valor escolhido pelo usuario
+            default_file_name = os.path.basename(file_path)
+            
+            #Chama a funcao de coletaAnunciosML com oo link e categoria selecionado
+            pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
+            pesquisaAnuncio.coletaAnunciosML(file_name=default_file_name)
     
     #Funcao para setar o icone em cada janela aberta
     def iconeJanelas(self, root):
@@ -271,7 +300,7 @@ def main():
             print(f'Erro ao carregar o icone: {e}')
     else:
         print(f'Error: O arquivo do icone nao foi encontrado no caminho: {icon_path}')
-        print('Verificar com o Administrador do Sistema')        
+        print('Verificar com o Administrador do Sistema')
     
     root.mainloop()
 

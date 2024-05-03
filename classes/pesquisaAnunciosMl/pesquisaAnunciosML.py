@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from time import sleep
 from classes.chamaDriver.chamaDriver import iniciaDriver
 
+
 #Cria uma lista fora da classe para salvar os dados
 lista_valores = []
 
@@ -14,7 +15,7 @@ class pesquisaMercadoLivre(iniciaDriver):
         super().__init__(driver=None, link=link)
         self.categoria = categoria
         
-    def coletaAnunciosML(self):
+    def coletaAnunciosML(self, file_name):
         
         #Pega o driver da classe chamaDriver e adiciona o link que foi inserido no input de link da classe app
         self.driver = self.chamaDriver()
@@ -32,14 +33,14 @@ class pesquisaMercadoLivre(iniciaDriver):
             
             #Abre um loop para cada 'li' coletado na variavel produtos
             for produto in produtos:
-                sleep(2)
+                sleep(1)
                 #Variavel que coleta o link da tag 'a' da classe definida
                 link = produto.find('a', attrs={'class': 'ui-search-item__group__element ui-search-link__title-card ui-search-link'})
                 #Pega a categoria que foi inserida no input da classe app
                 categoria = self.categoria
 
-                #Adiciona o link e a categoria, setando o 'href' no link conforme o BeatifulSoup determina e para
-                # categoria ficar sempre em letra MAIUSCULA
+                '''Adiciona o link e a categoria, setando o 'href' no link conforme o BeatifulSoup determina e para
+                 categoria ficar sempre em letra MAIUSCULA'''
                 lista_valores.append([link['href'], categoria.upper()])
             
             #Coleta do link para proxima pagina fora do loop for    
@@ -55,19 +56,20 @@ class pesquisaMercadoLivre(iniciaDriver):
                 print('Proxima Pagina Nao Encontrada!!! ENCERRANDO')
                 self.driver.close()
                 break
+        
         #Chama a funcao para salvar os dados obtidos
-        self.salvarDados()
+        self.salvarDados(file_name)
             
     #Funcao para salvar os dados gerados na pesquisa
-    def salvarDados(self):  
+    def salvarDados(self, file_name):  
         if self.driver is not None:
-            #Define o nome de todas as colunas pesquisadas. Obs: o nome entre ' ' vai seguir a 
-            # ordem que estiver no append da funcao coletaAnuncios, se não estiver
-            #  na mesma ordem vai trazer o nome das colunas na ordem errada 
+            '''Define o nome de todas as colunas pesquisadas. Obs: o nome entre ' ' vai seguir a 
+              ordem que estiver no append da funcao coletaAnuncios, se não estiver
+              na mesma ordem vai trazer o nome das colunas na ordem errada '''
             column = ['link', 'categoria']
             planilhaGerada = pd.DataFrame(lista_valores, columns=column)
-            #Salva o arquivo com o nome de planilha.csv separada por ; Obs: Se o nome for alterado por quebrar o codigo
-            # entao se for alterado deve ser alterado tambem na classe pesquisaAnuncianteML
-            planilhaGerada.to_csv('pesquisaAnunciosMercadoLivre.csv', index=False, sep=';')
+            '''Salva o arquivo com o nome setado pelo usuario e separado por ; Obs: Se o nome for alterado por quebrar o codigo
+               entao se for alterado deve ser alterado tambem na classe pesquisaAnuncianteML'''
+            planilhaGerada.to_csv(file_name, index=False, sep=';')
             
             

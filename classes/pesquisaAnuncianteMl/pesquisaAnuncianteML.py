@@ -1,6 +1,7 @@
 #Import de Libs usadas na classe
 import pandas as pd
-import os
+import os.path
+from tkinter import messagebox
 from time import sleep
 from classes.chamaDriver.chamaDriver import iniciaDriver, By
 
@@ -13,8 +14,11 @@ class pesquisaAnuncianteMl(iniciaDriver):
     #leitura da tabela gerada na classe pesquisaAnunciosML (a planilha deve estar na pasta do projeto 
     # para que funcione corretamente)
     filePath = 'pesquisaAnunciosMercadoLivre.csv'
-    links = pd.read_csv(filePath, sep=';')
     
+    if os.path.isfile(filePath):
+        links = pd.read_csv(filePath, sep=';')
+    else:
+        links = None
     
     #__init__ que faz a instancia do chamaDriver() e chama a categoria
     def __init__(self, link, categoria):
@@ -89,29 +93,33 @@ class pesquisaAnuncianteMl(iniciaDriver):
     # no Browser difinido na classe chamaDriver
     def pegaLink(self):
         
-        #Entra no loop para realizar a coleta do link e da categoria um por um
-        for index, row in self.links.iterrows():
-            #Pega o link linha por linha
-            link = row['link']
-            #Pega a categoria relacionado ao link
-            self.categoria = row['categoria']
-            #Salva o link na lista_link
-            lista_link.append(link)
+        if self.links is not None:
         
-            try:
-                sleep(1)
-                #Adiciona o link para o driver iniciar a manipulacao do Browser
-                self.driver.get(link)
-                #Chama a funcao coletaDadosAnunciante
-                self.coletaDadosAnunciante()
-                
-            except Exception as e:
-                #Em caso de Exception vai trazer o erro no terminal e dar break no sistema
-                print('Erro desconhecido ao acessar o link: ', str(e))
-                sleep(2)
-                break
-        #Chama a funcao salvaDados
-        self.salvaDados()
+            #Entra no loop para realizar a coleta do link e da categoria um por um
+            for index, row in self.links.iterrows():
+                #Pega o link linha por linha
+                link = row['link']
+                #Pega a categoria relacionado ao link
+                self.categoria = row['categoria']
+                #Salva o link na lista_link
+                lista_link.append(link)
+            
+                try:
+                    sleep(1)
+                    #Adiciona o link para o driver iniciar a manipulacao do Browser
+                    self.driver.get(link)
+                    #Chama a funcao coletaDadosAnunciante
+                    self.coletaDadosAnunciante()
+                    
+                except Exception as e:
+                    #Em caso de Exception vai trazer o erro no terminal e dar break no sistema
+                    print('Erro desconhecido ao acessar o link: ', str(e))
+                    sleep(2)
+                    break
+            #Chama a funcao salvaDados
+            self.salvaDados()
+        else:
+            messagebox.showinfo(title="Alerta!!", message="O arquivo CSV não existe. Selecione o arquivo novamente com o nome de 'pesquisaAnunciosMercadoLivre.csv'. Gerado na pesquisa de anúncios")
         
     #Funcao para salvar os dados obtidos na coleta
     def salvaDados(self):
