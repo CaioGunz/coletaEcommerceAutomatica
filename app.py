@@ -239,7 +239,7 @@ class janelas:
 
         if file_path:
             # Chamada para iniciar a pesquisa com o arquivo selecionado
-            pesquisaAnunciante = pesquisaAnuncianteMl(link='', categoria='')
+            pesquisaAnunciante = pesquisaAnuncianteMl(link='', categoria='', file_path=file_path)
             pesquisaAnunciante.pegaLink()
     
     #Funcao para iniciar a coleta de dados e iniciar a pesquisa baseado no link e categoria do input na pagina root

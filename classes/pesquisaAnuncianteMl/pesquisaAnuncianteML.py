@@ -14,17 +14,21 @@ class pesquisaAnuncianteMl(iniciaDriver):
     #leitura da tabela gerada na classe pesquisaAnunciosML (a planilha deve estar na pasta do projeto 
     # para que funcione corretamente)
     filePath = 'pesquisaAnunciosMercadoLivre.csv'
-    
-    if os.path.isfile(filePath):
-        links = pd.read_csv(filePath, sep=';')
-    else:
-        links = None
+
+
     
     #__init__ que faz a instancia do chamaDriver() e chama a categoria
-    def __init__(self, link, categoria):
+    def __init__(self, link, categoria, file_path):
         super().__init__(driver=None, link=link)
         self.categoria = categoria
         self.driver = self.chamaDriver()
+        self.filePath = file_path
+        
+        #Se o arquivo existir ele iniciar a pesquisa, se nao ele gera um erro
+        if os.path.isfile(self.filePath):
+            self.links = pd.read_csv(self.filePath, sep=';')
+        else:
+            self.links = None
         
     #Funcao para coletar os dados usando o Selenium com a funcao By e XPATH para o elemento da pagina
     def coletaDadosAnunciante(self):
@@ -50,13 +54,13 @@ class pesquisaAnuncianteMl(iniciaDriver):
             qtdVendida = 'null'
         try:
             #Faz a coleta do linkVendedor do anuncio no Mercado Livre utilizando XPATH para encontrar o elemento
-            linkVendedor = self.driver.find_element(By.XPATH, '//a[@class="ui-pdp-media__action ui-box-component__action"]').get_attribute('href')
+            linkVendedor = self.driver.find_element(By.XPATH, '//a[@class="andes-button andes-button--medium andes-button--quiet andes-button--full-width"]').get_attribute('href')
         except:
             #Caso a condicao do Try não exista, no except vai trazer como null para linkVendedor
             linkVendedor = 'null'
         try:
             #Faz a coleta da classificacaoVendedor do anuncio no Mercado Livre utilizando XPATH para encontrar o elemento
-            classificacaoVendedor = self.driver.find_element(By.XPATH, '//p[@class="ui-seller-info__status-info__title ui-pdp-seller__status-title"]').text
+            classificacaoVendedor = self.driver.find_element(By.XPATH, '//p[@class="ui-pdp-color--GREEN ui-pdp-size--XSMALL ui-pdp-family--SEMIBOLD ui-seller-data-status__title"]').text
         except:
             #Caso a condicao do Try não exista, no except vai trazer como null para classificacaoVendedor
             classificacaoVendedor = 'null'
@@ -105,7 +109,7 @@ class pesquisaAnuncianteMl(iniciaDriver):
                 lista_link.append(link)
             
                 try:
-                    sleep(1)
+                    sleep(0.5)
                     #Adiciona o link para o driver iniciar a manipulacao do Browser
                     self.driver.get(link)
                     #Chama a funcao coletaDadosAnunciante

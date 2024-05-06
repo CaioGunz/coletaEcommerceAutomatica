@@ -3,6 +3,8 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from time import sleep
 from classes.chamaDriver.chamaDriver import iniciaDriver
+from selenium.common.exceptions import InvalidArgumentException
+from tkinter import messagebox
 
 
 #Cria uma lista fora da classe para salvar os dados
@@ -33,7 +35,7 @@ class pesquisaMercadoLivre(iniciaDriver):
             
             #Abre um loop para cada 'li' coletado na variavel produtos
             for produto in produtos:
-                sleep(1)
+                sleep(0.5)
                 #Variavel que coleta o link da tag 'a' da classe definida
                 link = produto.find('a', attrs={'class': 'ui-search-item__group__element ui-search-link__title-card ui-search-link'})
                 #Pega a categoria que foi inserida no input da classe app
@@ -49,16 +51,24 @@ class pesquisaMercadoLivre(iniciaDriver):
             if proximaPagina:
                 #Pega o link da proxima pagina e adiciona a pesquisa para o driver pular a pagina
                 proximaPaginaLink = proximaPagina['href']
-                self.driver.get(proximaPaginaLink)
-                sleep(1)
+                
+                try:
+                    self.driver.get(proximaPaginaLink)
+                    sleep(0.5)
+                except InvalidArgumentException as e:
+                    #Chama a funcao para salvar os dados obtidos e fecha o navegador
+                     self.salvarDados(file_name)
+                     self.driver.close()
+                     return
+            
             else:
                 #Se nao for encontrado nenhum link o Browser e fechado e emitido o alerta no console
-                print('Proxima Pagina Nao Encontrada!!! ENCERRANDO')
+                messagebox.showinfo(title="Alerta!!", message='Erro ao acessar a próxima página. Encerrando.')
                 self.driver.close()
                 break
         
-        #Chama a funcao para salvar os dados obtidos
-        self.salvarDados(file_name)
+            #Chama a funcao para salvar os dados obtidos
+            self.salvarDados(file_name)
             
     #Funcao para salvar os dados gerados na pesquisa
     def salvarDados(self, file_name):  
