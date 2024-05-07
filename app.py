@@ -280,27 +280,31 @@ class janelas:
         #Abre a janela de carregamento dos dados
         janelaProgresso, barraProgresso = self.telaProgresso()
         
-        #Coleta os dados inseridos no input de link e categoria
-        linkColetado = self.inputEntradaLink.get()
-        categoria = self.inpuColetaCategoria.get()
-        
-        #Define o nome do arquivo padrão
-        default_file_name = 'pesquisaAnunciosMercadoLivre.csv'
-        
-        # Abre a janela de seleção de arquivo para salvar o arquivo a ser pesquisado
-        file_path = filedialog.asksaveasfilename(defaultextension=".csv", initialfile=default_file_name, filetypes=[("CSV Files", "*.csv")])
-        
-        if file_path:
-            #Atualiza o nome do arquivo com o valor escolhido pelo usuario
-            default_file_name = os.path.basename(file_path)
-                
-            #Chama a funcao de coletaAnunciosML com oo link e categoria selecionado
-            pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
-            pesquisaAnuncio.coletaAnunciosML(file_name=default_file_name)
+        def executaColetaEPesquisa():
+            #Coleta os dados inseridos no input de link e categoria
+            linkColetado = self.inputEntradaLink.get()
+            categoria = self.inpuColetaCategoria.get()
+            
+            #Define o nome do arquivo padrão
+            default_file_name = 'pesquisaAnunciosMercadoLivre.csv'
+            
+            # Abre a janela de seleção de arquivo para salvar o arquivo a ser pesquisado
+            file_path = filedialog.asksaveasfilename(defaultextension=".csv", initialfile=default_file_name, filetypes=[("CSV Files", "*.csv")])
+            
+            if file_path:
+                #Atualiza o nome do arquivo com o valor escolhido pelo usuario
+                default_file_name = os.path.basename(file_path)
+                    
+                #Chama a funcao de coletaAnunciosML com oo link e categoria selecionado
+                pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
+                pesquisaAnuncio.coletaAnunciosML(file_name=default_file_name)
 
-        #Para o carregamento dos dados e fecha a janela
-        barraProgresso.stop()
-        janelaProgresso.destroy()
+            #Para o carregamento dos dados e fecha a janela
+            barraProgresso.stop()
+            janelaProgresso.destroy()
+        
+        coletaTherad = threading.Thread(target=executaColetaEPesquisa)
+        coletaTherad.start()
     
     #Funcao dos botoes de voltar para pagina inicial 
     def voltarPaginaInicial(self):
