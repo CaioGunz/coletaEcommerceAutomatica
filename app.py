@@ -71,7 +71,7 @@ class janelas:
         self.rootPesquisaML.title('Pesquisa Mercado Livre')
         self.rootPesquisaML.resizable(width=False, height=False)
         self.rootPesquisaML.geometry('500x300')
-        self.rootPesquisaML.after(200, lambda: self.rootPesquisaML.iconbitmap("./Gunz-3.ico"))
+        self.rootPesquisaML.after(200, lambda: self.rootPesquisaML.iconbitmap("./assets/Gunz-3.ico"))
         
         #Titulo geral da pagina do Mercado Livre
         self.tituloAbaMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='WebScraping Mercado Livre', font=('Arial', 24))
@@ -129,7 +129,7 @@ class janelas:
             self.janhelaHelp.title('Sobre')
             self.janhelaHelp.resizable(width=False, height=False)
             self.janhelaHelp.geometry('500x300')
-            self.janhelaHelp.after(200, lambda: self.janhelaHelp.iconbitmap("./Gunz-3.ico"))
+            self.janhelaHelp.after(200, lambda: self.janhelaHelp.iconbitmap("./assets/Gunz-3.ico"))
 
             #Label sobre a versao do app
             self.labelInformacaoWebScraping = customtkinter.CTkLabel(self.janhelaHelp, text="WebScraping E-Commerce - ver 1.0", font=('Arial', 16, 'bold'))
@@ -203,7 +203,7 @@ class janelas:
         self.janelaProgresso = customtkinter.CTkToplevel()
         self.janelaProgresso.title("Carregando...")
         self.janelaProgresso.geometry("400x200")
-        self.janelaProgresso.after(200, lambda: self.janelaProgresso.iconbitmap("./Gunz-3.ico"))
+        self.janelaProgresso.after(200, lambda: self.janelaProgresso.iconbitmap("./assets/Gunz-3.ico"))
         
         self.tituloJanelaProgresso = customtkinter.CTkLabel(self.janelaProgresso, text="Realizando a coleta de dados, não feche o sistema. Aguarde!!!", font=('Arial', 16, 'bold'))
         self.tituloJanelaProgresso.pack(pady=30, padx=20)
@@ -321,7 +321,7 @@ def main():
     root.resizable(width=False, height=False)
     #Define o tamanho da janela
     root.geometry('500x300')
-    root.after(200, lambda: root.iconbitmap("./Gunz-3.ico"))
+    root.after(200, lambda: root.iconbitmap("./assets/Gunz-3.ico"))
     
     root.mainloop()
 
