@@ -37,7 +37,7 @@ class iniciaDriver:
         option.add_argument(f'user-agent={user_agent}')
         
         #Oculta o driver enquanto o Scrypt estiver funcionando
-        #option.add_argument('--headless')
+        option.add_argument('--headless')
         
         #Faz a instalacao automatica do Browser selecionado evitando assim ter que ficar baixando manualmente
         # e adiciona o service e options no Browser 

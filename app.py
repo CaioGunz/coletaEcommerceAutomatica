@@ -5,10 +5,10 @@ import customtkinter
 import sys
 import webbrowser
 import warnings
-from tkinter import filedialog
+import threading
 from PIL import Image, ImageTk
-from tkinter import messagebox, PhotoImage, Frame
-from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre
+from tkinter import messagebox, filedialog
+from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre, pd
 from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteMl
 from classes.chamaDriver.chamaDriver import iniciaDriver
 
@@ -197,6 +197,27 @@ class janelas:
 
             #Altera o estado da variável de controle
             self.janela_de_ajuda_aberta = True
+
+    #Funcao que cria uma janela com o progresso da pesquisa sendo feita
+    def telaProgresso(self):
+        #Abre a janela de progresso da pesquisa
+        janelaProgresso = customtkinter.CTkToplevel()
+        janelaProgresso.title("Carregando...")
+        janelaProgresso.geometry("400x200")
+        
+        tituloJanelaProgresso = customtkinter.CTkLabel(janelaProgresso, text="Realizando a coleta de dados. Aguarde!!!", font=('Arial', 16, 'bold'))
+        tituloJanelaProgresso.pack(pady=30, padx=20)
+        
+        #Adiciona a barra de progresso
+        barraProgresso = customtkinter.CTkProgressBar(janelaProgresso, orientation='horizontal', mode='indeterminate', progress_color='#008485', width=350, height=15)
+        barraProgresso.pack(padx=20)
+        # Inicia a barra de progresso
+        barraProgresso.start()
+        
+        # Torna a janela de progresso modal para impedir interação com a janela principal
+        janelaProgresso.grab_set()
+        
+        return janelaProgresso, barraProgresso
             
     #Funcao com o link do GitHub    
     def acesseGithub(self):
@@ -233,17 +254,32 @@ class janelas:
    
    #Funcao para iniciar a pesquisa de Anunciantes onde o comando é chamado no botaoiniciaPesquisaAnunciante
     def coletaDadosAnuncianteML(self):
+        #Abre a janela de carregamento dos dados
+        janelaProgresso, barraProgresso = self.telaProgresso()
         
-        # Abrir a janela de seleção de arquivo
-        file_path = filedialog.askopenfilename(filetypes=[("CSV Files", "*.csv")])
+        def executaPesquisa():
+            # Abrir a janela de seleção de arquivo
+            file_path = filedialog.askopenfilename(filetypes=[("CSV Files", "*.csv")])
+            
+            if file_path:
+                # Chamada para iniciar a pesquisa com o arquivo selecionado
+                pesquisaAnunciante = pesquisaAnuncianteMl(link='', categoria='', file_path=file_path)
+                pesquisaAnunciante.pegaLink()
+            
+            #Para o carregamento dos dados e fecha a janela
+            barraProgresso.stop()
+            janelaProgresso.destroy()
 
-        if file_path:
-            # Chamada para iniciar a pesquisa com o arquivo selecionado
-            pesquisaAnunciante = pesquisaAnuncianteMl(link='', categoria='', file_path=file_path)
-            pesquisaAnunciante.pegaLink()
+        #Executa o codigo e faz com que a barra nao fique travada
+        pesquisaThread = threading.Thread(target=executaPesquisa)
+        pesquisaThread.start()
     
     #Funcao para iniciar a coleta de dados e iniciar a pesquisa baseado no link e categoria do input na pagina root
     def coletaDadosParaPesquisa(self):
+        
+        #Abre a janela de carregamento dos dados
+        janelaProgresso, barraProgresso = self.telaProgresso()
+        
         #Coleta os dados inseridos no input de link e categoria
         linkColetado = self.inputEntradaLink.get()
         categoria = self.inpuColetaCategoria.get()
@@ -253,15 +289,19 @@ class janelas:
         
         # Abre a janela de seleção de arquivo para salvar o arquivo a ser pesquisado
         file_path = filedialog.asksaveasfilename(defaultextension=".csv", initialfile=default_file_name, filetypes=[("CSV Files", "*.csv")])
+        
         if file_path:
-            
             #Atualiza o nome do arquivo com o valor escolhido pelo usuario
             default_file_name = os.path.basename(file_path)
-            
+                
             #Chama a funcao de coletaAnunciosML com oo link e categoria selecionado
             pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
             pesquisaAnuncio.coletaAnunciosML(file_name=default_file_name)
-    
+
+        #Para o carregamento dos dados e fecha a janela
+        barraProgresso.stop()
+        janelaProgresso.destroy()
+        
     #Funcao para setar o icone em cada janela aberta
     def iconeJanelas(self, root):
         #Procura o icone usando a lib os
@@ -282,6 +322,8 @@ class janelas:
         
         self.root.deiconify()
     
+
+        
 #Funcao main para iniciar o sistema
 def main():
     #Cria a janela principal
