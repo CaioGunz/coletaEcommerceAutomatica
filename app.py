@@ -23,7 +23,6 @@ class janelas:
         #Cria a janela root com o titulo de Gunz Program
         self.root = root
         self.root.title('Gunz Program')
-
         
         #Titulo Geral do aplicativo (Pagina Inicial)
         self.tituloAbaGeral = customtkinter.CTkLabel(self.root, text='WebScraping Ecommerce', font=('Arial', 24))
@@ -72,7 +71,7 @@ class janelas:
         self.rootPesquisaML.title('Pesquisa Mercado Livre')
         self.rootPesquisaML.resizable(width=False, height=False)
         self.rootPesquisaML.geometry('500x300')
-        self.iconeJanelas(root=self.rootPesquisaML)
+        self.rootPesquisaML.after(200, lambda: self.rootPesquisaML.iconbitmap("./assets/Gunz-3.ico"))
         
         #Titulo geral da pagina do Mercado Livre
         self.tituloAbaMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='WebScraping Mercado Livre', font=('Arial', 24))
@@ -130,7 +129,7 @@ class janelas:
             self.janhelaHelp.title('Sobre')
             self.janhelaHelp.resizable(width=False, height=False)
             self.janhelaHelp.geometry('500x300')
-            self.iconeJanelas(root=self.janhelaHelp)
+            self.janhelaHelp.after(200, lambda: self.janhelaHelp.iconbitmap("./assets/Gunz-3.ico"))
 
             #Label sobre a versao do app
             self.labelInformacaoWebScraping = customtkinter.CTkLabel(self.janhelaHelp, text="WebScraping E-Commerce - ver 1.0", font=('Arial', 16, 'bold'))
@@ -201,23 +200,24 @@ class janelas:
     #Funcao que cria uma janela com o progresso da pesquisa sendo feita
     def telaProgresso(self):
         #Abre a janela de progresso da pesquisa
-        janelaProgresso = customtkinter.CTkToplevel()
-        janelaProgresso.title("Carregando...")
-        janelaProgresso.geometry("400x200")
+        self.janelaProgresso = customtkinter.CTkToplevel()
+        self.janelaProgresso.title("Carregando...")
+        self.janelaProgresso.geometry("400x200")
+        self.janelaProgresso.after(200, lambda: self.janelaProgresso.iconbitmap("./assets/Gunz-3.ico"))
         
-        tituloJanelaProgresso = customtkinter.CTkLabel(janelaProgresso, text="Realizando a coleta de dados. Aguarde!!!", font=('Arial', 16, 'bold'))
-        tituloJanelaProgresso.pack(pady=30, padx=20)
+        self.tituloJanelaProgresso = customtkinter.CTkLabel(self.janelaProgresso, text="Realizando a coleta de dados. Aguarde!!!", font=('Arial', 16, 'bold'))
+        self.tituloJanelaProgresso.pack(pady=30, padx=20)
         
         #Adiciona a barra de progresso
-        barraProgresso = customtkinter.CTkProgressBar(janelaProgresso, orientation='horizontal', mode='indeterminate', progress_color='#008485', width=350, height=15)
-        barraProgresso.pack(padx=20)
+        self.barraProgresso = customtkinter.CTkProgressBar(self.janelaProgresso, orientation='horizontal', mode='indeterminate', progress_color='#008485', width=350, height=15)
+        self.barraProgresso.pack(padx=20)
         # Inicia a barra de progresso
-        barraProgresso.start()
+        self.barraProgresso.start()
         
         # Torna a janela de progresso modal para impedir interação com a janela principal
-        janelaProgresso.grab_set()
+        self.janelaProgresso.grab_set()
         
-        return janelaProgresso, barraProgresso
+        return self.janelaProgresso, self.barraProgresso
             
     #Funcao com o link do GitHub    
     def acesseGithub(self):
@@ -301,28 +301,12 @@ class janelas:
         #Para o carregamento dos dados e fecha a janela
         barraProgresso.stop()
         janelaProgresso.destroy()
-        
-    #Funcao para setar o icone em cada janela aberta
-    def iconeJanelas(self, root):
-        #Procura o icone usando a lib os
-        icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'Gunz-3.ico')
-        if os.path.exists(icon_path):
-            try:
-                #Adiciona o icone na janela aberta
-                root.iconbitmap(icon_path)
-            except Exception as e:
-                print(f'Erro ao carregar o icone: {e}')
-        else:
-            print(f'Error: O arquivo do icone nao foi encontrado no caminho: {icon_path}')
-            print('Verificar com o Administrador do Sistema')  
-
+    
     #Funcao dos botoes de voltar para pagina inicial 
     def voltarPaginaInicial(self):
         self.rootPesquisaML.destroy()
         
         self.root.deiconify()
-    
-
         
 #Funcao main para iniciar o sistema
 def main():
@@ -333,16 +317,7 @@ def main():
     root.resizable(width=False, height=False)
     #Define o tamanho da janela
     root.geometry('500x300')
-    icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'Gunz-3.ico')
-    if os.path.exists(icon_path):
-        try:
-            #Adiciona o icone na janela aberta
-            root.iconbitmap(icon_path)
-        except Exception as e:
-            print(f'Erro ao carregar o icone: {e}')
-    else:
-        print(f'Error: O arquivo do icone nao foi encontrado no caminho: {icon_path}')
-        print('Verificar com o Administrador do Sistema')
+    root.iconbitmap('assets/Gunz-3.ico')
     
     root.mainloop()
 
