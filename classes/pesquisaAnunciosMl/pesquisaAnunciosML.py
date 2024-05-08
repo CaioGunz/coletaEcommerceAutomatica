@@ -19,6 +19,9 @@ class pesquisaMercadoLivre(iniciaDriver):
         
     def coletaAnunciosML(self, file_name):
         
+        #Limpa a lista para começar uma nova pesquisa
+        lista_valores.clear()
+        
         #Pega o driver da classe chamaDriver e adiciona o link que foi inserido no input de link da classe app
         self.driver = self.chamaDriver()
         self.driver.get(self.link)
@@ -32,6 +35,9 @@ class pesquisaMercadoLivre(iniciaDriver):
             
             #pega todos os elementos que estão em uma 'li' da classe definida
             produtos = site.find_all('li', attrs={'class': 'ui-search-layout__item'})
+            
+            if not produtos:
+                break
             
             #Abre um loop para cada 'li' coletado na variavel produtos
             for produto in produtos:
@@ -67,8 +73,8 @@ class pesquisaMercadoLivre(iniciaDriver):
                 self.driver.close()
                 break
         
-            #Chama a funcao para salvar os dados obtidos
-            self.salvarDados(file_name)
+        #Chama a funcao para salvar os dados obtidos
+        self.salvarDados(file_name)
             
     #Funcao para salvar os dados gerados na pesquisa
     def salvarDados(self, file_name):  

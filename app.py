@@ -16,7 +16,7 @@ from classes.chamaDriver.chamaDriver import iniciaDriver
 
 class janelas:
     
-    janela_de_ajuda_aberta = False
+    janelaAjudaAberta = False
     
     #Funcao __init__ que cria a primeira e principal janela do sistema com botoes
     def __init__(self, root):
@@ -25,7 +25,7 @@ class janelas:
         self.root.title('Gunz Program')
         
         #Titulo Geral do aplicativo (Pagina Inicial)
-        self.tituloAbaGeral = customtkinter.CTkLabel(self.root, text='WebScraping Ecommerce', font=('Arial', 24))
+        self.tituloAbaGeral = customtkinter.CTkLabel(self.root, text='WebScraping Ecommerce', font=('Arial', 22, 'bold'))
         self.tituloAbaGeral.place(x=110, y=20)
         
         #Botao para acessar a janela de Pesquisa anuncios mercado livre
@@ -57,9 +57,9 @@ class janelas:
         self.listaModoAparencia.place(x=10, y=260)
     
     #Funcao de comando para o botao de tema do sistema
-    def change_apm(self, nova_aparencia):
+    def change_apm(self, novaAparencia):
         #Instancia novo tema
-        customtkinter.set_appearance_mode(nova_aparencia)
+        customtkinter.set_appearance_mode(novaAparencia)
     
     #Funcao que cria a janela de pesquisa do mercado livre        
     def pesquisaMercadoLivre(self):
@@ -71,10 +71,10 @@ class janelas:
         self.rootPesquisaML.title('Pesquisa Mercado Livre')
         self.rootPesquisaML.resizable(width=False, height=False)
         self.rootPesquisaML.geometry('500x300')
-        self.rootPesquisaML.after(200, lambda: self.rootPesquisaML.iconbitmap("./assets/Gunz-3.ico"))
+        self.rootPesquisaML.after(200, lambda: self.rootPesquisaML.iconbitmap("assets/Gunz-3.ico"))
         
         #Titulo geral da pagina do Mercado Livre
-        self.tituloAbaMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='WebScraping Mercado Livre', font=('Arial', 24))
+        self.tituloAbaMercadoLivre = customtkinter.CTkLabel(self.rootPesquisaML, text='WebScraping Mercado Livre', font=('Arial', 22, 'bold'))
         self.tituloAbaMercadoLivre.place(x=110, y=20)
         
         #Label para vazio e assim posicionar o titulo corretamente
@@ -115,84 +115,77 @@ class janelas:
         #Adiciona o protocolo de encerramento do sistema pela janela de pesquisa Mercado Livre
         self.rootPesquisaML.protocol("WM_DELETE_WINDOW", self.confirmarSaida)
     
-    #Funcao que cra uma janela de Help com informações do sistema
+    # Função para carregar e redimensionar imagens
+    def carregarEDimensionarImagem(self,caminho, tamanho):
+        imagem = Image.open(caminho)
+        imagemRedimensionada = imagem.resize(tamanho)
+        return ImageTk.PhotoImage(imagemRedimensionada)
+
+    # Função para criar botões
+    def criarBotaoHelp(self, master, imagem, comando):
+        botao = customtkinter.CTkButton(master, image=imagem, command=comando,
+                                        corner_radius=32, fg_color='transparent', hover_color='#008485', text=None,
+                                        height=0, width=0)
+        botao.pack(padx=(30, 0), side='left')
+
+    #Função que cria uma janela de Help com informações do sistema
     def telaHelp(self, event=None):
 
-        if self.janela_de_ajuda_aberta:
+        if janelas.janelaAjudaAberta:
             #Fecha a janela de ajuda se já estiver aberta
-            self.janhelaHelp.destroy()
+            self.janelaHelp.destroy()
             #Altera o estado da variável de controle
-            self.janela_de_ajuda_aberta = False
+            self.janelaAjudaAberta = False
         else:
             #Cria a janela de ajuda se não estiver aberta
-            self.janhelaHelp = customtkinter.CTkToplevel(self.root)
-            self.janhelaHelp.title('Sobre')
-            self.janhelaHelp.resizable(width=False, height=False)
-            self.janhelaHelp.geometry('500x300')
-            self.janhelaHelp.after(200, lambda: self.janhelaHelp.iconbitmap("./assets/Gunz-3.ico"))
+            self.janelaHelp = customtkinter.CTkToplevel(self.root)
+            self.janelaHelp.title('Sobre')
+            self.janelaHelp.resizable(width=False, height=False)
+            self.janelaHelp.geometry('500x300')
+            self.janelaHelp.after(200, lambda: self.janelaHelp.iconbitmap("assets/Gunz-3.ico"))
+            
+            if getattr(sys, 'frozen', False):
+                # Em um executavel esse bloco deve ajustar as imagens para que sejam encontradas
+                self.caminhoImagemGithub = os.path.join(sys._MEIPASS, 'assets', 'github.png')
+                self.caminhoImagemLinkedin = os.path.join(sys._MEIPASS, 'assets', 'linkedin.png')
+                self.caminhoImagemPortfolio = os.path.join(sys._MEIPASS, 'assets', 'portfolio.png')
+                self.caminhoImagemPix = os.path.join(sys._MEIPASS, 'assets', 'qrCodePix.png')
+            else:
+                self.caminhoImagemGithub = './assets/github.png'
+                self.caminhoImagemLinkedin = './assets/linkedin.png'
+                self.caminhoImagemPortfolio = './assets/portfolio.png'
+                self.caminhoImagemPix = './assets/qrCodePix.png'
 
-            #Label sobre a versao do app
-            self.labelInformacaoWebScraping = customtkinter.CTkLabel(self.janhelaHelp, text="WebScraping E-Commerce - ver 1.0", font=('Arial', 16, 'bold'))
+            # Label sobre a versão do app
+            self.labelInformacaoWebScraping = customtkinter.CTkLabel(self.janelaHelp, text="WebScraping E-Commerce - ver 1.0", font=('Arial', 16, 'bold'))
             self.labelInformacaoWebScraping.pack(pady=(80, 0))
-            #Label sobre o autor do sistema
-            self.labelInformacaoDesenvolvedor = customtkinter.CTkLabel(self.janhelaHelp, text="Desenvolvido por Caio Araujo Ⓒ - 2024", font=('Arial', 14))
+            # Label sobre o autor do sistema
+            self.labelInformacaoDesenvolvedor = customtkinter.CTkLabel(self.janelaHelp, text="Desenvolvido por Caio Araujo Ⓒ - 2024", font=('Arial', 14))
             self.labelInformacaoDesenvolvedor.pack(pady=(0, 10))
             
             warnings.filterwarnings("ignore", category=UserWarning)
             
-            # Botao para acessar a Documentacao
-            self.botaoGithub = customtkinter.CTkButton(self.janhelaHelp, text='Documentação📃', command=self.acesseDocumentacao,
-                                           corner_radius=32, fg_color='transparent', hover_color='#008485', height=0, width=0, font=('Arial', 14, 'bold'))
-            self.botaoGithub.pack(padx=(0, 0), side='top')
+            # Botão para acessar a Documentação
+            self.botaoDocumentacao = customtkinter.CTkButton(self.janelaHelp, text='Documentação📃', command=self.acesseDocumentacao,
+                                        corner_radius=32, fg_color='#008485', font=('Arial', 14, 'bold'))
+            self.botaoDocumentacao.pack(padx=(0, 0), side='top')
+
+            # Carrega e redimensiona imagens
+            self.imagemGithub = self.carregarEDimensionarImagem(self.caminhoImagemGithub, (30, 30))
+            self.imagemLinkedin = self.carregarEDimensionarImagem(self.caminhoImagemLinkedin, (30, 30))
+            self.imagemPortfolio = self.carregarEDimensionarImagem(self.caminhoImagemPortfolio, (30, 30))
+            self.imagemPix = self.carregarEDimensionarImagem(self.caminhoImagemPix, (100, 100))
+
+            # Cria os botões
+            self.criarBotaoHelp(self.janelaHelp, self.imagemGithub, self.acesseGithub)
+            self.criarBotaoHelp(self.janelaHelp, self.imagemLinkedin, self.acesseLinkedin)
+            self.criarBotaoHelp(self.janelaHelp, self.imagemPortfolio, self.acessePortfolio)
+            self.criarBotaoHelp(self.janelaHelp, self.imagemPix, self.acesseDoacaoPix)
             
-            # Icone do Github 
-            imagemGitHub = Image.open('assets/GitHub.png')
-            imagemGitHub = imagemGitHub.resize((30, 30))
-            self.imagemGitHubPronta = ImageTk.PhotoImage(imagemGitHub)
-
-            # Botao para acessar o Github
-            self.botaoGithub = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemGitHubPronta, command=self.acesseGithub,
-                                           corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoGithub.pack(padx=(155, 0), side='left')
-
-            # Icone do LinkedIn 
-            imagemLinkedin = Image.open('assets/linkedin.png')
-            imagemLinkedin = imagemLinkedin.resize((30, 30))
-            self.imagemLinkedinPronta = ImageTk.PhotoImage(imagemLinkedin)
-
-            # Botao para acessar o LinkedIn
-            self.botaoLinkedin = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemLinkedinPronta, command=self.acesseLinkedin,
-                                             corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoLinkedin.pack(padx=(30, 0), side='left')
-
-            # Icone do Portfolio 
-            imagemPortfolio = Image.open('assets/portfolio.png')
-            imagemPortfolio = imagemPortfolio.resize((30, 30))
-            self.imagemPortfolioPronta = ImageTk.PhotoImage(imagemPortfolio)
-
-            # Botao para acessar o Portfolio
-            self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPortfolioPronta, command=self.acessePortfolio,
-                                              corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoPortfolio.pack(padx=(30, 0), side='left')
-            
-            #Label para doacao
-            self.labelDoacaoPix = customtkinter.CTkLabel(self.janhelaHelp, text="Doe um Pix", font=('Arial', 14, 'bold'))
-            self.labelDoacaoPix.pack(pady=(0, 0))
-            
-            # Icone do Pix 
-            imagemPix = Image.open('assets/qrCodePix.png')
-            imagemPix = imagemPix.resize((100, 100))
-            self.imagemPix = ImageTk.PhotoImage(imagemPix)
-
-            # Botao para acessar o Pix
-            self.botaoPortfolio = customtkinter.CTkButton(self.janhelaHelp, image=self.imagemPix, command=self.acesseDoacaoPix,
-                                              corner_radius=32, fg_color='transparent', hover_color='#008485', text=None, height=0, width=0)
-            self.botaoPortfolio.pack(padx=(50, 0), side='left')
-
             warnings.filterwarnings("default", category=UserWarning)
 
             #Define a janela de ajuda como modal
-            self.janhelaHelp.grab_set()
+            self.janelaHelp.grab_set()
 
             #Altera o estado da variável de controle
             self.janela_de_ajuda_aberta = True
@@ -202,14 +195,14 @@ class janelas:
         #Abre a janela de progresso da pesquisa
         self.janelaProgresso = customtkinter.CTkToplevel()
         self.janelaProgresso.title("Carregando...")
-        self.janelaProgresso.geometry("400x200")
-        self.janelaProgresso.after(200, lambda: self.janelaProgresso.iconbitmap("./assets/Gunz-3.ico"))
+        self.janelaProgresso.geometry("400x150")
+        self.janelaProgresso.after(200, lambda: self.janelaProgresso.iconbitmap("assets/Gunz-3.ico"))
         
-        self.tituloJanelaProgresso = customtkinter.CTkLabel(self.janelaProgresso, text="Realizando a coleta de dados, não feche o sistema. Aguarde!!!", font=('Arial', 16, 'bold'))
+        self.tituloJanelaProgresso = customtkinter.CTkLabel(self.janelaProgresso, text="Realizando a coleta de dados, não feche o sistema.\n Aguarde!!!", font=('Arial', 14, 'bold'))
         self.tituloJanelaProgresso.pack(pady=30, padx=20)
         
         #Adiciona a barra de progresso
-        self.barraProgresso = customtkinter.CTkProgressBar(self.janelaProgresso, orientation='horizontal', mode='indeterminate', progress_color='#008485', width=350, height=15)
+        self.barraProgresso = customtkinter.CTkProgressBar(self.janelaProgresso, orientation='horizontal', mode='indeterminate', progress_color='#008485', width=330, height=10)
         self.barraProgresso.pack(padx=20)
         # Inicia a barra de progresso
         self.barraProgresso.start()
@@ -250,6 +243,7 @@ class janelas:
    
     #Funcao para gerar o alerta no botao de pesquisa Amazon
     def alertaBotaoPesquisaAmazon(self):
+        
         messagebox.showinfo(title="Alerta!!", message='Pagina em construcao !!')
    
    #Funcao para iniciar a pesquisa de Anunciantes onde o comando é chamado no botaoiniciaPesquisaAnunciante
@@ -297,7 +291,7 @@ class janelas:
                     
                 #Chama a funcao de coletaAnunciosML com oo link e categoria selecionado
                 pesquisaAnuncio = pesquisaMercadoLivre(link=linkColetado, categoria=categoria)        
-                pesquisaAnuncio.coletaAnunciosML(file_name=default_file_name)
+                pesquisaAnuncio.coletaAnunciosML(file_name=file_path)
 
             #Para o carregamento dos dados e fecha a janela
             barraProgresso.stop()
@@ -321,7 +315,7 @@ def main():
     root.resizable(width=False, height=False)
     #Define o tamanho da janela
     root.geometry('500x300')
-    root.after(200, lambda: root.iconbitmap("./assets/Gunz-3.ico"))
+    root.after(200, lambda: root.iconbitmap("assets/Gunz-3.ico"))
     
     root.mainloop()
 
