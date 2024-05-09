@@ -8,19 +8,13 @@ Este projeto foi feito para realizar a coleta de dados de anuncios e anunciantes
 <a id="baixar"></a>
 ## Como baixar e instalar(usar):
 
-Para baixar os arquivos você deve seguir os seguintes passos:
+### Baixar arquivos
 
-1. Ao entrar no site você deve identificar esse botão com nome de **<> Code** ![Botao baixar github](./assets/botaoCodeGithub.png)  ao clicar neste botão você tera acesso ao botão de **DownLoad ZIP** como na imagem a baixo e assim baixar o aplicativo:
+Para baixar o aplicativo você deve seguir os seguintes passos:
 
-    ![Imagen download zip](./assets/botaoDownloadGithub.png)
+1. [Clique aqui para baixar o Aplicativo](https://github.com/CaioGunz/coletaEcommerceAutomatica/archive/refs/heads/main.zip) o sistema estara dentro de um arquivo **.zip/rar** que você deve descompactar para conseguir usar **(Não é necessário instalar)**.
 
-2. Para executar o aplicativo você deve abrir um terminal **CMD ou PowerShell**. Para abrir um **CMD** va no seu menu inicicar e escreva CMD e clique. Essa imagem mostra qual aplicativo é ![Imagem CMD](./assets/imagensCMDIcon.png).
-
-3. Após abrir o cmg, você deve verificar o caminho do arquivo e entrar na pasta onde está o **app.py**, você pode copiar o caminho da pasta e executar esse comando no terminal: **cd seu/caminho** assim o terminar ira para o caminho onde está o arquivo.
-
-4. Estando dentro da pasta que contem o arquivo **app.py** basta executar o comando no terminal: **python app.py** que irá abrir o alicativo e você pode realizar sua pesquisa normalmente. A imagem a seguir mostra como deve ser:
-
-    ![Comando no terminal](./assets/imagemComandoCMD.png)
+2. Para executar o aplicativo você deve abrir a pasta do aplicatico e procurar pelo executável **WebScraping.exe** que é este aqui: ![Imagem Executável](./assets/executavel.png), clicar duas vezes e o aplicativo esta pronto para usar, caso tenha duvidas basta ler a documentação com o passo a passo de como utilizar e realizar a pesquisa.
 
 
 <a id="imagensAplicativo"></a>
