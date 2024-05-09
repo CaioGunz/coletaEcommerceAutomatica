@@ -7,7 +7,7 @@
   },
   {
    "optionDest": "filenames",
-   "value": "./coletaEcommerceAutomatica/app.py"
+   "value": "//coletaEcommerceAutomatica/app.py"
   },
   {
    "optionDest": "onefile",
@@ -19,7 +19,7 @@
   },
   {
    "optionDest": "icon_file",
-   "value": "./coletaEcommerceAutomatica/assets/Gunz-3.ico"
+   "value": "//coletaEcommerceAutomatica/assets/Gunz-3.ico"
   },
   {
    "optionDest": "clean_build",
@@ -55,11 +55,11 @@
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/assets;assets/"
+   "value": "//coletaEcommerceAutomatica/assets;assets/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/classes;classes/"
+   "value": "//coletaEcommerceAutomatica/classes;classes/"
   },
   {
    "optionDest": "hiddenimports",
@@ -83,27 +83,27 @@
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/customtkinter;customtkinter/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/customtkinter;customtkinter/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/webdriver_manager;webdriver_manager/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/webdriver_manager;webdriver_manager/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/pytz;pytz/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/pytz;pytz/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/requests;requests/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/requests;requests/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/urllib3;urllib3/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/urllib3;urllib3/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/selenium;selenium/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/selenium;selenium/"
   },
   {
    "optionDest": "hiddenimports",
@@ -111,15 +111,15 @@
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/certifi;certifi/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/certifi;certifi/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/idna;idna/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/idna;idna/"
   },
   {
    "optionDest": "datas",
-   "value": "./coletaEcommerceAutomatica/venv/Lib/site-packages/dotenv;dotenv/"
+   "value": "//coletaEcommerceAutomatica/venv/Lib/site-packages/dotenv;dotenv/"
   }
  ],
  "nonPyinstallerOptions": {

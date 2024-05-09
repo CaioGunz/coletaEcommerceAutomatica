@@ -7,7 +7,7 @@ import webbrowser
 import warnings
 import threading
 from PIL import Image, ImageTk
-from tkinter import messagebox, filedialog
+from tkinter import messagebox, filedialog, ttk
 from classes.pesquisaAnunciosMl.pesquisaAnunciosML import pesquisaMercadoLivre, pd
 from classes.pesquisaAnuncianteMl.pesquisaAnuncianteML import pesquisaAnuncianteMl
 from classes.chamaDriver.chamaDriver import iniciaDriver
@@ -305,20 +305,29 @@ class janelas:
         self.rootPesquisaML.destroy()
         
         self.root.deiconify()
-        
-#Funcao main para iniciar o sistema
+
+# Setando a tela de carregamento inicial do aplicativo
+if getattr(sys, 'frozen', False):
+    # Importa a lib responsável por essa tela de carregamento
+    import pyi_splash
+
+# Funcao main para iniciar o sistema
 def main():
-    #Cria a janela principal
+    # Cria a janela principal
     root = customtkinter.CTk()
     app = janelas(root)
-    #Fixa o tamanho da janela sem deixar aumentar com o mouse
+    # Fixa o tamanho da janela sem deixar aumentar com o mouse
     root.resizable(width=False, height=False)
-    #Define o tamanho da janela
+    # Define o tamanho da janela
     root.geometry('500x300')
     root.after(200, lambda: root.iconbitmap("assets/Gunz-3.ico"))
     
+    # Verifica se o sistema ainda esta inicializando
+    if getattr(sys, 'frozen', False):
+        pyi_splash.close()  # Fecha a tela de splash após o carregamento
+
     root.mainloop()
 
-#Inicia o main
+# Inicia o main
 if __name__ == '__main__':
     main()
