@@ -6,11 +6,9 @@ Este projeto foi feito para realizar a coleta de dados de anuncios e anunciantes
 
 ### Baixar arquivos
 
-Para baixar os arquivos você deve seguir os seguintes passos:
+Para baixar o aplicativo você deve seguir os seguintes passos:
 
-1. Ao entrar no site você deve identificar esse botão com nome de **<> Code** ![Botao baixar github](./assets/botaoCodeGithub.png)  ao clicar neste botão você tera acesso ao botão de **DownLoad ZIP** como na imagem a baixo e assim baixar o aplicativo:
-
-    ![Imagen download zip](./assets/botaoDownloadGithub.png)
+1. [Clique aqui para baixar o Aplicativo](https://github.com/CaioGunz/coletaEcommerceAutomatica/archive/refs/heads/main.zip) o sistema estara dentro de um arquivo **.zip/rar** que você deve descompactar para conseguir usar **(Não é necessário instalar)**.
 
 2. Para executar o aplicativo você deve abrir a pasta do aplicatico e procurar pelo executável **WebScraping.exe** que é este aqui: ![Imagem Executável](/assets/executavel.png), clicar duas vezes e o aplicativo esta pronto para usar, caso tenha duvidas basta ler a documentação com o passo a passo de como utilizar e realizar a pesquisa.
 
