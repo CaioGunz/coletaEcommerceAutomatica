@@ -53,6 +53,12 @@ class pesquisaAnuncianteMl(iniciaDriver):
             #Caso a condicao do Try não exista, no except vai trazer como null para qtdVendida
             qtdVendida = 'null'
         try:
+            #Faz a coleta da qtdVendida do anuncio no Mercado Livre utilizando XPATH para encontrar o elemento
+            nomeVendedor = self.driver.find_element(By.XPATH, '//div[@class="ui-seller-data-header__title-container"]//span').text
+        except:
+            #Caso a condicao do Try não exista, no except vai trazer como null para qtdVendida
+            nomeVendedor = 'null'
+        try:
             #Faz a coleta do linkVendedor do anuncio no Mercado Livre utilizando XPATH para encontrar o elemento
             linkVendedor = self.driver.find_element(By.XPATH, '//a[@class="andes-button andes-button--medium andes-button--quiet andes-button--full-width"]').get_attribute('href')
         except:
@@ -90,7 +96,7 @@ class pesquisaAnuncianteMl(iniciaDriver):
             link = 'null'    
         
         #Salva os dados coletados na lista_valores criada no começo do scrypt   
-        lista_valores.append([titulo, preco, qtdVendida, linkVendedor, classificacaoVendedor, marca, sku, categoria, link])
+        lista_valores.append([titulo, preco, qtdVendida, nomeVendedor,linkVendedor, classificacaoVendedor, marca, sku, categoria, link])
 
     
     #Função para pegar o link da planilha.csv adicionar na lista_link e realizar a pesquisa 
@@ -130,7 +136,7 @@ class pesquisaAnuncianteMl(iniciaDriver):
         #Define o nome de todas as colunas pesquisadas. Obs: o nome entre ' ' vai seguir a 
         # ordem que estiver no append da funcao coletaDadosAnunciante, se não estiver
         #  na mesma ordem vai trazer o nome das colunas na ordem errada 
-        columns = ['titulo', 'preco', 'qtdVendida', 'linkVendedor', 'classificacaoVendedor', 'marca', 'sku', 'categoria', 'link']
+        columns = ['titulo', 'preco', 'qtdVendida', 'nomeVendedor','linkVendedor', 'classificacaoVendedor', 'marca', 'sku', 'categoria', 'link']
         planilha = pd.DataFrame(lista_valores, columns=columns)
         #Salva a pesquisa realizada com o nome de planilhaGerada no formato CSV separada por ;
         planilha.to_csv('pesquisaAnuncianteMercadoLivre.csv', index=False, sep=';', encoding='utf-8')
