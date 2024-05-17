@@ -6,4 +6,4 @@ site_dir: _site
 
 theme:
     name: readthedocs
-    logo: ./assets/Gunz-3.ico
+    logo: ./assets/logoGrande-2.ico
